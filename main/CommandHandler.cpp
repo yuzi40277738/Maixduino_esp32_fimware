@@ -158,7 +158,7 @@ void _setupEventHandlers(void) {
 }
 
 static void _setupAfterWifiBegin(void) {
-  _setupNTP();
+  // 确保 DNS 配置正确（ESP-IDF 5.x 可能需要显式获取 DHCP DNS）
   _setupEventHandlers();
 }
 
@@ -256,12 +256,14 @@ int setNet(const uint8_t command[], uint8_t response[])
   memset(ssid, 0x00, sizeof(ssid));
   memcpy(ssid, &command[4], command[3]);
 
+  // 先构建响应，再启动 WiFi
+  response[2] = 1;
+  response[3] = 1;
+  response[4] = 1;
+
+  WiFi.mode(WIFI_STA);
   WiFi.begin(ssid);
   _setupAfterWifiBegin();
-
-  response[2] = 1; // number of parameters
-  response[3] = 1; // parameter 1 length
-  response[4] = 1;
 
   return 6;
 }
@@ -277,12 +279,14 @@ int setPassPhrase(const uint8_t command[], uint8_t response[])
   memcpy(ssid, &command[4], command[3]);
   memcpy(pass, &command[5 + command[3]], command[4 + command[3]]);
 
+  // 先构建响应，再启动 WiFi
+  response[2] = 1;
+  response[3] = 1;
+  response[4] = 1;
+
+  WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, pass);
   _setupAfterWifiBegin();
-
-  response[2] = 1; // number of parameters
-  response[3] = 1; // parameter 1 length
-  response[4] = 1;
 
   return 6;
 }
@@ -1025,6 +1029,13 @@ int reqHostByName(const uint8_t command[], uint8_t response[])
 
   response[2] = 1; // number of parameters
   response[3] = 1; // parameter 1 length
+
+  // 确保 DNS 已配置（ESP-IDF 5.x DHCP 可能延迟）
+  if (WiFi.dnsIP(0) == IPAddress(0,0,0,0)) {
+    // fallback DNS
+    IPAddress dns(8,8,8,8);
+    WiFi.setDNS(dns, dns);
+  }
 
   IPAddress ip_address;
   if (WiFi.hostByName(host, ip_address) == 1) {

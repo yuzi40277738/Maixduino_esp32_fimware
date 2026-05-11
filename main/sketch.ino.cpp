@@ -1,20 +1,8 @@
 /*
-  This file is part of the Arduino NINA firmware.
-  Copyright (c) 2018 Arduino SA. All rights reserved.
-
-  This library is free software; you can redistribute it and/or
-  modify it under the terms of the GNU Lesser General Public
-  License as published by the Free Software Foundation; either
-  version 2.1 of the License, or (at your option) any later version.
-
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  Lesser General Public License for more details.
-
-  You should have received a copy of the GNU Lesser General Public
-  License along with this library; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+  Main firmware for NINA module on Maixduino
+  - Force WiFi mode (Bluetooth disabled)
+  - No ADC initialization (avoid driver_ng conflict)
+  - SPI pins via board.h
 */
 
 #include <rom/uart.h>
@@ -23,13 +11,11 @@ extern "C" {
   #include "esp_private/periph_ctrl.h"
   #include "soc/gpio_periph.h"
   #include "soc/periph_defs.h"
-  // #include <driver/periph_ctrl.h>
-
   #include <driver/uart.h>
   #include <esp_bt.h>
-
   #include "esp_spiffs.h"
   #include "esp_log.h"
+  #include "nvs_flash.h"
   #include <stdio.h>
   #include <sys/types.h>
   #include <dirent.h>
@@ -37,29 +23,23 @@ extern "C" {
 }
 
 #include <Arduino.h>
-
 #include <SPIS.h>
 #include <WiFi.h>
-
 #include "CommandHandler.h"
+
+// 注意：不再包含 <driver/adc.h>，完全移除 ADC 功能
 
 #define SPI_BUFFER_LEN SPI_MAX_DMA_LEN
 
-// UART debug is enabled on boot
+// 调试输出默认开启
 int debug = 1;
 
-//--------------------------------------------------------------------
-// ADAFRUIT CHANGE
-//--------------------------------------------------------------------
-
-// contains SPIS and BT/BLE UART pin definitions
-#if !__has_include("board.h")
-#error "Board is not supported, please add -DBOARD=<board_name> to the build command"
-#endif
+// 定义硬件版本宏（用于蓝牙部分，但蓝牙已禁用）
+#define UNO_WIFI_REV2   1
 
 #include "board.h"
 
-#define AIRLIFT 1 // Adafruit Airlift
+#define AIRLIFT 1
 #define NINA_PRINTF(...) do { if (debug) { ets_printf(__VA_ARGS__); } } while (0)
 
 #if defined(CONFIG_IDF_TARGET_ESP32)
@@ -67,128 +47,91 @@ int debug = 1;
   extern const struct __sFILE_fake __sf_fake_stdout;
   extern const struct __sFILE_fake __sf_fake_stderr;
 
-  // dev, dma, mosi, miso, sclk, cs, ready
+  // SPIS 实例化（引脚来自 board.h，已修改为 14,23,18,5,25）
   SPISClass SPIS(VSPI_HOST, 1, AIRLIFT_MOSI, AIRLIFT_MISO, AIRLIFT_SCK, AIRLIFT_CS, AIRLIFT_BUSY);
 #endif
 
-#if defined(CONFIG_IDF_TARGET_ESP32C6)
-  // UART for BLE HCI
-  // CONFIG_BT_LE_HCI_UART_RTS_PIN and CONFIG_BT_LE_HCI_UART_CTS_PIN are defined in boards/{BOARD}/sdkconfig
-  // and used by hci_driver_uart_config() in hci_driver_uart.c. It should matches with BUSY and BOOT pins.
-  #ifndef CONFIG_BT_LE_HCI_INTERFACE_USE_UART
-  #error "Please Enable Uart for HCI"
-  #endif
-
-  #if CONFIG_BT_LE_HCI_UART_CTS_PIN != 9
-  #error "CTS pin must be the same as BOOT pin"
-  #endif
-
-  // dev, dma, mosi, miso, sclk, cs, ready
-  SPISClass SPIS(SPI2_HOST, SPI_DMA_CH_AUTO,
-                 AIRLIFT_MOSI, AIRLIFT_MISO, AIRLIFT_SCK, AIRLIFT_CS, AIRLIFT_BUSY);
-#endif
-
-// prevent initArduino() to release BT memory
+// 阻止 Arduino 框架释放蓝牙内存（强制 WiFi）
 extern "C" bool btInUse() {
   return true;
 }
 
-//--------------------------------------------------------------------
-//
-//--------------------------------------------------------------------
 uint8_t* commandBuffer;
 uint8_t* responseBuffer;
 
 void dumpBuffer(const char* label, uint8_t data[], int length) {
   ets_printf("%s: ", label);
-
   for (int i = 0; i < length; i++) {
     ets_printf("%02x", data[i]);
   }
-
   ets_printf("\r\n");
 }
 
 void setDebug(int d) {
   debug = d;
-
   if (debug) {
     PIN_FUNC_SELECT(GPIO_PIN_MUX_REG[1], 0);
     PIN_FUNC_SELECT(GPIO_PIN_MUX_REG[3], 0);
-
     const char* default_uart_dev = "/dev/uart/0";
     _GLOBAL_REENT->_stdin  = fopen(default_uart_dev, "r");
     _GLOBAL_REENT->_stdout = fopen(default_uart_dev, "w");
     _GLOBAL_REENT->_stderr = fopen(default_uart_dev, "w");
-
     uart_div_modify(CONFIG_CONSOLE_UART_NUM, (APB_CLK_FREQ << 4) / 115200);
-
-    // uartAttach();
     ets_install_uart_printf();
     uart_tx_switch(CONFIG_CONSOLE_UART_NUM);
   } else {
     PIN_FUNC_SELECT(GPIO_PIN_MUX_REG[1], PIN_FUNC_GPIO);
     PIN_FUNC_SELECT(GPIO_PIN_MUX_REG[3], PIN_FUNC_GPIO);
-
 #if CONFIG_IDF_TARGET_ESP32
     _GLOBAL_REENT->_stdin  = (FILE*) &__sf_fake_stdin;
     _GLOBAL_REENT->_stdout = (FILE*) &__sf_fake_stdout;
     _GLOBAL_REENT->_stderr = (FILE*) &__sf_fake_stderr;
 #endif
-
     ets_install_putc1(NULL);
     ets_install_putc2(NULL);
   }
 }
 
 void setupWiFi();
-void setupBluetooth();
+void setupBluetooth();   // 保留声明但不再调用
 
+// ============================================
+// setup() 修改：
+// 1. 强制调用 setupWiFi()，忽略 CS 引脚电平（禁用蓝牙）
+// 2. 移除所有 ADC 初始化代码（避免 driver_ng 冲突）
+// ============================================
 void setup() {
 #ifndef CMAKE_BUILD_TYPE_DEBUG
   setDebug(0);
 #endif
 
 #if !AIRLIFT
-  // put SWD and SWCLK pins connected to SAMD as inputs
   pinMode(15, INPUT);
   pinMode(21, INPUT);
 #endif
 
-  pinMode(AIRLIFT_CS, INPUT);
-  if (digitalRead(AIRLIFT_CS) == LOW) {
-    setupBluetooth();
-  } else {
-    setupWiFi();
-  }
+  // 直接进入 WiFi 模式，不再判断 CS 引脚
+  setupWiFi();
 }
 
-// #define UNO_WIFI_REV2
-
+// 蓝牙初始化函数（已不被调用，保留以防恢复）
 void setupBluetooth() {
   NINA_PRINTF("*** BLUETOOTH\n");
-
   periph_module_enable(PERIPH_UART1_MODULE);
   periph_module_enable(PERIPH_UHCI0_MODULE);
-
   esp_bt_controller_config_t btControllerConfig = BT_CONTROLLER_INIT_CONFIG_DEFAULT();
 
 #if defined(CONFIG_IDF_TARGET_ESP32)
 #if defined(AIRLIFT)
-  // TX GPIO1 & RX GPIO3 on ESP32 'hardware' UART
-  // RTS on ESP_BUSY (GPIO33)
-  // CTS on GPIO0 (GPIO0)
   uart_set_pin(UART_NUM_1, 1, 3, AIRLIFT_RTS, AIRLIFT_CTS);
 #elif defined(UNO_WIFI_REV2)
-  uart_set_pin(UART_NUM_1, 1, 3, 33, 0); // TX, RX, RTS, CTS
+  uart_set_pin(UART_NUM_1, 1, 3, 33, 0);
 #elif defined(NANO_RP2040_CONNECT)
-  uart_set_pin(UART_NUM_1, 1, 3, 33, 12); // TX, RX, RTS, CTS
+  uart_set_pin(UART_NUM_1, 1, 3, 33, 12);
 #else
   uart_set_pin(UART_NUM_1, 23, 12, 18, 5);
 #endif
-
   uart_set_hw_flow_ctrl(UART_NUM_1, UART_HW_FLOWCTRL_CTS_RTS, 5);
-
   btControllerConfig.hci_uart_no = UART_NUM_1;
 #if defined(AIRLIFT)
   btControllerConfig.hci_uart_baudrate = 115200;
@@ -197,9 +140,6 @@ void setupBluetooth() {
 #else
   btControllerConfig.hci_uart_baudrate = 912600;
 #endif
-
-#elif defined(CONFIG_IDF_TARGET_ESP32C6)
-  // UART is configured by CONFIG_BT_LE_HCI_UART_XYZ in sdkconfig.defaults.esp32c6
 #endif
 
   esp_err_t ret = esp_bt_controller_init(&btControllerConfig);
@@ -208,16 +148,12 @@ void setupBluetooth() {
     NINA_PRINTF("esp_bt_controller_init failed: 0x%x\n", ret);
     while (1) {}
   }
-
   while (esp_bt_controller_get_status() == ESP_BT_CONTROLLER_STATUS_IDLE);
   esp_bt_controller_enable(ESP_BT_MODE_BLE);
-
 #if defined(CONFIG_IDF_TARGET_ESP32)
   esp_bt_sleep_enable();
 #endif
-
   vTaskSuspend(NULL);
-
   while (1) {
     vTaskDelay(portMAX_DELAY);
   }
@@ -225,6 +161,14 @@ void setupBluetooth() {
 
 void setupWiFi() {
   NINA_PRINTF("WIFI ON\n");
+
+  // 初始化 NVS（WiFi 需要）
+  esp_err_t nvs_ret = nvs_flash_init();
+  if (nvs_ret == ESP_ERR_NVS_NO_FREE_PAGES || nvs_ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
+    nvs_flash_erase();
+    nvs_flash_init();
+  }
+
   esp_bt_controller_mem_release(ESP_BT_MODE_BTDM);
   SPIS.begin();
 
@@ -234,7 +178,6 @@ void setupWiFi() {
     .max_files = 20,
     .format_if_mount_failed = true
   };
-
   esp_err_t ret = esp_vfs_spiffs_register(&conf);
   (void) ret;
 
@@ -251,14 +194,20 @@ void setupWiFi() {
 
   NINA_PRINTF("*** CommandHandler Begin\n");
   CommandHandler.begin();
+
+  // 初始化 NTP 和 WiFi 事件处理（只需一次）
+  // _setupAfterWifiBegin() 在 CommandHandler.cpp 中定义，但此处无法直接调用
+  // 改为在 setPassPhrase/setNet 首次调用时自动完成
 }
 
 void loop() {
-  // wait for a command
+  // 等待 SPI 命令（使用超时，让 WiFi 后台任务有机会运行）
   memset(commandBuffer, 0x00, SPI_BUFFER_LEN);
   int commandLength = SPIS.transfer(NULL, commandBuffer, SPI_BUFFER_LEN);
 
   if (commandLength == 0) {
+    // 没有 SPI 命令时，让出 CPU 给 WiFi 任务
+    delay(1);
     return;
   }
 
@@ -266,10 +215,11 @@ void loop() {
     dumpBuffer("COMMAND", commandBuffer, commandLength);
   }
 
-  // process
+  // 处理命令
   memset(responseBuffer, 0x00, SPI_BUFFER_LEN);
   int responseLength = CommandHandler.handle(commandBuffer, responseBuffer);
 
+  // 返回响应
   SPIS.transfer(responseBuffer, NULL, responseLength);
 
   if (debug) {

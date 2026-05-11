@@ -6,7 +6,7 @@ import argparse
 import os
 
 def extract_firmware_version():
-    with open('main/CommandHandler.cpp', 'r') as file:
+    with open('main/CommandHandler.cpp', 'r', encoding='utf-8', errors='ignore') as file:
         for line in file:
             if 'const char FIRMWARE_VERSION[] = ' in line:
                 # The line format is `const char FIRMWARE_VERSION[] = "2.0.0-adafruit";`

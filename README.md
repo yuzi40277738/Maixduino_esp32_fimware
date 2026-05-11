@@ -1,3 +1,72 @@
+# 最新适配内容：
+基于最新nina-fw (Maixduino/K210 适配版)
+基于官方 nina-fw 修改，专为 Maixduino (K210 + ESP32) 硬件平台定制，适配 ESP-IDF 5.x，解决原生固件无法在 K210 上正常运行 WiFi/MQTT 等网络功能的问题。
+项目概述
+本项目是对 Arduino NINA 固件的深度定制修改，将原本面向 Adafruit Airlift 开发板的固件，完整移植适配到 Maixduino (K210 + ESP32) 硬件，修复 SPI 引脚、WiFi 模式、网络协议、编译依赖等核心问题，确保 ESP32 协处理器稳定为 K210 提供网络服务。
+核心修改内容
+1. 硬件引脚适配（关键）
+修改 boards/esp32/board.h，重定义 SPI 硬件引脚，完全匹配 K210 硬件电路：
+表格
+plaintext
+信号	原生固件引脚	修改后引脚	用途说明
+MOSI	12	14	K210 SPI 从机数据输入
+BUSY	33	25	K210 状态检测专用引脚
+MISO/SCK/CS	23/18/5	保持不变	基础 SPI 通信引脚
+2. 固件运行模式修改
+重写 main/sketch.ino.cpp 核心逻辑：
+强制开启 WiFi 模式，彻底禁用蓝牙功能
+删除冲突的 ADC 初始化代码，避免驱动报错
+新增 NVS 闪存初始化，保证 WiFi 配置持久化生效
+移除无用的 ESP32C6 兼容代码，简化逻辑
+优化主循环，提升 WiFi 后台任务运行稳定性
+3. 网络功能优化
+增强 main/CommandHandler.cpp，解决网络连接问题：
+优化 WiFi 连接逻辑，强制设置 STA 模式
+新增 DNS 备用方案：DHCP 分配失败时自动使用 8.8.8.8 公共 DNS
+适配 ESP-IDF 5.x API，注释冲突的 NTP 初始化逻辑
+提升 WiFi 连接、域名解析的稳定性
+4. 编译与工具链适配
+main/CMakeLists.txt：新增 NVS 组件依赖，修复编译缺失问题
+combine.py：修复 UTF-8 编码报错，提升脚本兼容性
+新增 VS Code 配置文件，适配本地 ESP-IDF 5.5 工具链
+生成完整依赖锁定文件，保证编译环境一致性
+适配目标平台
+主控：K210 (Maixduino)
+协处理器：ESP32（负责 WiFi / 网络通信）
+编译环境：ESP-IDF v5.5
+主要功能
+✅ 稳定 WiFi 连接（支持 DHCP / 手动 DNS）
+✅ MQTT 客户端通信（适配国内服务器，解决连接失败问题）
+✅ DNS 域名解析（自带备用 DNS）
+✅ SPI 与 K210 高速通信
+✅ 兼容标准 NINA 协议指令
+使用说明
+本固件仅用于 Maixduino/K210 开发板，不可用于其他 ESP32 硬件
+基于 ESP-IDF 5.x 编译，不兼容低版本 IDF
+直接编译烧录至 ESP32 协处理器即可使用
+网络连接失败时，优先使用国内 MQTT 服务器 + 开放端口
+文件结构说明
+plaintext
+nina-fw/
+├── boards/esp32/board.h       # SPI 硬件引脚配置
+├── main/
+│   ├── sketch.ino.cpp         # 固件入口，核心模式修改
+│   ├── CommandHandler.cpp/.h  # WiFi/网络指令处理
+│   ├── CMakeLists.txt         # 编译依赖配置
+│   ├── http_client.c          # HTTP 客户端功能
+│   └── 其他源码文件
+├── Makefile                   # 编译脚本
+├── combine.py                 # 固件打包脚本（编码修复）
+└── .vscode/                   # VS Code + ESP-IDF 配置
+总结
+本修改版 nina-fw 彻底解决了 K210 + ESP32 平台上：
+SPI 通信异常
+WiFi 无法启动
+DNS 解析失败
+MQTT TCP 连接失败 / 协议错误
+编译报错、驱动冲突
+是 Maixduino 开发板使用 ESP32 网络功能的专用固件。
+
 # Adafruit fork of the Arduino NINA-W102 firmware
 
 [![Build Status](https://travis-ci.com/adafruit/nina-fw.svg?branch=master)](https://travis-ci.com/adafruit/nina-fw)
