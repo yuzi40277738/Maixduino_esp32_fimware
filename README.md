@@ -6,12 +6,14 @@
 核心修改内容
 1. 硬件引脚适配（关键）
 修改 boards/esp32/board.h，重定义 SPI 硬件引脚，完全匹配 K210 硬件电路：
-表格
+```
 plaintext
+
 信号	原生固件引脚	修改后引脚	用途说明
 MOSI	12	14	K210 SPI 从机数据输入
 BUSY	33	25	K210 状态检测专用引脚
 MISO/SCK/CS	23/18/5	保持不变	基础 SPI 通信引脚
+```
 2. 固件运行模式修改
 重写 main/sketch.ino.cpp 核心逻辑：
 强制开启 WiFi 模式，彻底禁用蓝牙功能
@@ -46,6 +48,7 @@ combine.py：修复 UTF-8 编码报错，提升脚本兼容性
 直接编译烧录至 ESP32 协处理器即可使用
 网络连接失败时，优先使用国内 MQTT 服务器 + 开放端口
 文件结构说明
+```
 plaintext
 nina-fw/
 ├── boards/esp32/board.h       # SPI 硬件引脚配置
@@ -58,6 +61,7 @@ nina-fw/
 ├── Makefile                   # 编译脚本
 ├── combine.py                 # 固件打包脚本（编码修复）
 └── .vscode/                   # VS Code + ESP-IDF 配置
+```
 总结
 本修改版 nina-fw 彻底解决了 K210 + ESP32 平台上：
 SPI 通信异常
