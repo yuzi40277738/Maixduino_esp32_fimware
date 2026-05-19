@@ -13,7 +13,7 @@ static const char* TAG = "HTTP_CLIENT";
 int downloadAndSaveFile(char * url, FILE * f, const char * cert_pem)
 {
   char *buffer = (char*)malloc(MAX_HTTP_RECV_BUFFER);
-  if (buffer == NULL) {
+  if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
     return -1;
   }
   esp_http_client_config_t config = {

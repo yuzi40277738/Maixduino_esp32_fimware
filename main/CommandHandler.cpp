@@ -1403,12 +1403,24 @@ int ping(const uint8_t command[], uint8_t response[])
 int getSocket(const uint8_t command[], uint8_t response[])
 {
   uint8_t result = 255;
+  bool requested = false;
 
-  for (int i = 0; i < MAX_SOCKETS; i++) {
-    if (socketTypes[i] == NO_MODE) {
-      result = i;
-      socketWasConnected[i] = false;
-      break;
+  if (command[2] == 1 && command[3] == 1) {
+    requested = true;
+    uint8_t requested_socket = command[4];
+    if (requested_socket < MAX_SOCKETS && socketTypes[requested_socket] == NO_MODE) {
+      result = requested_socket;
+      socketWasConnected[requested_socket] = false;
+    }
+  }
+
+  if (!requested) {
+    for (int i = 0; i < MAX_SOCKETS; i++) {
+      if (socketTypes[i] == NO_MODE) {
+        result = i;
+        socketWasConnected[i] = false;
+        break;
+      }
     }
   }
 
