@@ -1,4 +1,6 @@
 build/
+build_esp32/
+build_log.md
 *.bin
 # Regenerate sdkconfig from the sdkconfig.defaults* files.
 sdkconfig.esp32
