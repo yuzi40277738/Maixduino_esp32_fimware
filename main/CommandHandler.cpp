@@ -160,6 +160,7 @@ void _setupEventHandlers(void) {
 static void _setupAfterWifiBegin(void) {
   // 确保 DNS 配置正确（ESP-IDF 5.x 可能需要显式获取 DHCP DNS）
   _setupEventHandlers();
+  _setupNTP();
 }
 
 static int _ping(/*IPAddress*/uint32_t host, uint8_t ttl) {
@@ -766,6 +767,7 @@ int availDataTcp(const uint8_t command[], uint8_t response[])
       available = tcpClients[socket].available();
     }
   } else if (socketTypes[socket] == UDP_MODE) {
+    udps[socket].parsePacket();
     available = udps[socket].available();
   } else if (socketTypes[socket] == TLS_MODE) {
     available = tlsClients[socket].available();
@@ -871,6 +873,12 @@ int startClientTcp(const uint8_t command[], uint8_t response[])
     }
   } else if (type == UDP_MODE) {
     int result;
+
+    if (!udps[socket].begin(0)) {
+      xSemaphoreGive(socketMutex[socket]);
+      response[2] = 0;
+      return 4;
+    }
 
     if (host[0] != '\0') {
       result = udps[socket].beginPacket(host, port);

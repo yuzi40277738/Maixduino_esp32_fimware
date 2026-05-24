@@ -1,0 +1,2 @@
+source D:/K210_Test_App/nina-fw/build_esp32/gdbinit/symbols
+source D:/K210_Test_App/nina-fw/build_esp32/gdbinit/connect

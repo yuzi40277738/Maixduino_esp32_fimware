@@ -1,0 +1,282 @@
+Command: ninja all
+[1/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/main.cpp.obj
+[2/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/MD5Builder.cpp.obj
+[3/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/Stream.cpp.obj
+[4/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/Print.cpp.obj
+[5/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/SHA1Builder.cpp.obj
+[6/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/USB.cpp.obj
+[7/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/HWCDC.cpp.obj
+[8/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/USBCDC.cpp.obj
+[9/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/USBMSC.cpp.obj
+[10/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/FirmwareMSC.cpp.obj
+[11/218] Building C object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/firmware_msc_fat.c.obj
+[12/218] Building C object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/wiring_pulse.c.obj
+[13/218] Building C object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/wiring_shift.c.obj
+[14/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/WMath.cpp.obj
+[15/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/Esp.cpp.obj
+[16/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLE2901.cpp.obj
+[17/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/StreamString.cpp.obj
+[18/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLE2902.cpp.obj
+[19/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/Tone.cpp.obj
+[20/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLE2904.cpp.obj
+[21/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEAddress.cpp.obj
+[22/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEAdvertisedDevice.cpp.obj
+[23/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEAdvertising.cpp.obj
+[24/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEBeacon.cpp.obj
+[25/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLECharacteristic.cpp.obj
+[26/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLECharacteristicMap.cpp.obj
+[27/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEClient.cpp.obj
+[28/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEDescriptor.cpp.obj
+[29/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEDescriptorMap.cpp.obj
+[30/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEDevice.cpp.obj
+[31/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEEddystoneTLM.cpp.obj
+[32/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEEddystoneURL.cpp.obj
+[33/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEExceptions.cpp.obj
+[34/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEHIDDevice.cpp.obj
+[35/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLERemoteCharacteristic.cpp.obj
+[36/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/cores/esp32/WString.cpp.obj
+[37/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLERemoteService.cpp.obj
+[38/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLERemoteDescriptor.cpp.obj
+[39/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/AsyncUDP/src/AsyncUDP.cpp.obj
+[40/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEScan.cpp.obj
+[41/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLESecurity.cpp.obj
+[42/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEServiceMap.cpp.obj
+[43/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEService.cpp.obj
+[44/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEServer.cpp.obj
+[45/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEUtils.cpp.obj
+[46/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEUUID.cpp.obj
+[47/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/BLEValue.cpp.obj
+[48/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BluetoothSerial/src/BTAddress.cpp.obj
+[49/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BluetoothSerial/src/BluetoothSerial.cpp.obj
+[50/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BluetoothSerial/src/BTAdvertisedDeviceSet.cpp.obj
+[51/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/ArduinoOTA/src/ArduinoOTA.cpp.obj
+[52/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BluetoothSerial/src/BTScanResultsSet.cpp.obj
+[53/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/ESP_SR/src/ESP_SR.cpp.obj
+[54/218] Building C object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/ESP_SR/src/esp32-hal-sr.c.obj
+[55/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/EEPROM/src/EEPROM.cpp.obj
+[56/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/ESPmDNS/src/ESPmDNS.cpp.obj
+[57/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/FreeRTOS.cpp.obj
+[58/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/BLE/src/GeneralUtils.cpp.obj
+[59/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/DNSServer/src/DNSServer.cpp.obj
+[60/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Insights/src/Insights.cpp.obj
+[61/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Ethernet/src/ETH.cpp.obj
+[62/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterGenericSwitch.cpp.obj
+[63/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterOnOffLight.cpp.obj
+[64/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterDimmableLight.cpp.obj
+[65/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterColorTemperatureLight.cpp.obj
+[66/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterColorLight.cpp.obj
+[67/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/FFat/src/FFat.cpp.obj
+[68/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/FS/src/FS.cpp.obj
+[69/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterEnhancedColorLight.cpp.obj
+[70/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterFan.cpp.obj
+[71/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterHumiditySensor.cpp.obj
+[72/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterTemperatureSensor.cpp.obj
+[73/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/FS/src/vfs_api.cpp.obj
+[74/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterContactSensor.cpp.obj
+[75/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterOccupancySensor.cpp.obj
+[76/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterPressureSensor.cpp.obj
+[77/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterOnOffPlugin.cpp.obj
+[78/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndpoints/MatterThermostat.cpp.obj
+[79/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/Matter.cpp.obj
+[80/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Matter/src/MatterEndPoint.cpp.obj
+[81/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/HTTPClient/src/HTTPClient.cpp.obj
+[82/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/LittleFS/src/LittleFS.cpp.obj
+[83/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/NetBIOS/src/NetBIOS.cpp.obj
+[84/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Network/src/NetworkManager.cpp.obj
+[85/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/OpenThread/src/OThread.cpp.obj
+[86/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Network/src/NetworkEvents.cpp.obj
+[87/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Network/src/NetworkInterface.cpp.obj
+[88/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/OpenThread/src/OThreadCLI.cpp.obj
+[89/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/PPP/src/PPP.cpp.obj
+[90/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/OpenThread/src/OThreadCLI_Util.cpp.obj
+[91/218] Building C object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/PPP/src/ppp.c.obj
+[92/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Network/src/NetworkServer.cpp.obj
+[93/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Network/src/NetworkUdp.cpp.obj
+[94/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Network/src/NetworkClient.cpp.obj
+[95/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/RainMaker/src/RMakerNode.cpp.obj
+[96/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/RainMaker/src/RMaker.cpp.obj
+[97/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Preferences/src/Preferences.cpp.obj
+[98/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/RainMaker/src/RMakerParam.cpp.obj
+[99/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/RainMaker/src/RMakerType.cpp.obj
+[100/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/RainMaker/src/RMakerDevice.cpp.obj
+[101/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/RainMaker/src/AppInsights.cpp.obj
+[102/218] Building C object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/SD/src/sd_diskio_crc.c.obj
+[103/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/SimpleBLE/src/SimpleBLE.cpp.obj
+[104/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/RainMaker/src/RMakerQR.cpp.obj
+[105/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/RainMaker/src/RMakerUtils.cpp.obj
+[106/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/SD/src/sd_diskio.cpp.obj
+[107/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Ticker/src/Ticker.cpp.obj
+[108/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/SPI/src/SPI.cpp.obj
+[109/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/SD_MMC/src/SD_MMC.cpp.obj
+[110/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/SD/src/SD.cpp.obj
+[111/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WebServer/src/detail/mimetable.cpp.obj
+[112/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/SPIFFS/src/SPIFFS.cpp.obj
+[113/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Update/src/HttpsOTAUpdate.cpp.obj
+[114/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Update/src/Updater.cpp.obj
+[115/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WebServer/src/middleware/MiddlewareChain.cpp.obj
+[116/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WebServer/src/Parsing.cpp.obj
+[117/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WebServer/src/middleware/AuthenticationMiddleware.cpp.obj
+[118/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WebServer/src/WebServer.cpp.obj
+[119/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WebServer/src/middleware/CorsMiddleware.cpp.obj
+[120/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/NetworkClientSecure/src/ssl_client.cpp.obj
+[121/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WebServer/src/middleware/LoggingMiddleware.cpp.obj
+[122/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFi/src/WiFiAP.cpp.obj
+[123/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/NetworkClientSecure/src/NetworkClientSecure.cpp.obj
+[124/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFi/src/WiFi.cpp.obj
+[125/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFi/src/WiFiMulti.cpp.obj
+[126/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFi/src/WiFiGeneric.cpp.obj
+[127/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFi/src/WiFiScan.cpp.obj
+[128/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ZigbeeCore.cpp.obj
+[129/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ZigbeeEP.cpp.obj
+[130/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Wire/src/Wire.cpp.obj
+[131/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ZigbeeHandlers.cpp.obj
+[132/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeColorDimmerSwitch.cpp.obj
+[133/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeColorDimmableLight.cpp.obj
+[134/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFi/src/WiFiSTA.cpp.obj
+[135/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFi/src/AP.cpp.obj
+[136/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeLight.cpp.obj
+[137/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeDimmableLight.cpp.obj
+[138/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFi/src/STA.cpp.obj
+[139/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/WiFiProv/src/WiFiProv.cpp.obj
+[140/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeThermostat.cpp.obj
+[141/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeTempSensor.cpp.obj
+[142/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeFlowSensor.cpp.obj
+[143/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeSwitch.cpp.obj
+[144/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeePressureSensor.cpp.obj
+[145/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeOccupancySensor.cpp.obj
+[146/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeCarbonDioxideSensor.cpp.obj
+[147/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeDoorWindowHandle.cpp.obj
+[148/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeContactSwitch.cpp.obj
+[149/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeWindowCovering.cpp.obj
+[150/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeVibrationSensor.cpp.obj
+[151/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeAnalog.cpp.obj
+[152/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeGateway.cpp.obj
+[153/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeWindSpeedSensor.cpp.obj
+[154/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeIlluminanceSensor.cpp.obj
+[155/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeRangeExtender.cpp.obj
+[156/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeePM25Sensor.cpp.obj
+[157/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeBinary.cpp.obj
+[158/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeElectricalMeasurement.cpp.obj
+[159/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeeFanControl.cpp.obj
+[160/218] Building CXX object esp-idf/arduino-esp32/CMakeFiles/__idf_arduino-esp32.dir/libraries/Zigbee/src/ep/ZigbeePowerOutlet.cpp.obj
+[161/218] Building C object esp-idf/unity/CMakeFiles/__idf_unity.dir/unity_compat.c.obj
+[162/218] Building C object esp-idf/unity/CMakeFiles/__idf_unity.dir/unity_utils_cache.c.obj
+[163/218] Building C object esp-idf/unity/CMakeFiles/__idf_unity.dir/unity_runner.c.obj
+[164/218] Building C object esp-idf/unity/CMakeFiles/__idf_unity.dir/unity_utils_memory.c.obj
+[165/218] Building C object esp-idf/unity/CMakeFiles/__idf_unity.dir/unity_utils_freertos.c.obj
+[166/218] Building C object esp-idf/unity/CMakeFiles/__idf_unity.dir/unity_port_esp32.c.obj
+[167/218] Building C object esp-idf/unity/CMakeFiles/__idf_unity.dir/unity/src/unity.c.obj
+[168/218] Building C object esp-idf/unity/CMakeFiles/__idf_unity.dir/port/esp/unity_utils_memory_esp.c.obj
+[169/218] Building C object esp-idf/app_trace/CMakeFiles/__idf_app_trace.dir/app_trace.c.obj
+[170/218] Building C object esp-idf/app_trace/CMakeFiles/__idf_app_trace.dir/app_trace_util.c.obj
+[171/218] Building C object esp-idf/app_trace/CMakeFiles/__idf_app_trace.dir/host_file_io.c.obj
+[172/218] Building C object esp-idf/app_trace/CMakeFiles/__idf_app_trace.dir/port/port_uart.c.obj
+[173/218] Building C object esp-idf/cmock/CMakeFiles/__idf_cmock.dir/CMock/src/cmock.c.obj
+[174/218] Building C object esp-idf/esp_driver_cam/CMakeFiles/__idf_esp_driver_cam.dir/esp_cam_ctlr.c.obj
+[175/218] Building CXX object esp-idf/SPIS/CMakeFiles/__idf_SPIS.dir/src/SPIS.cpp.obj
+[176/218] Linking C static library esp-idf\unity\libunity.a
+[177/218] Building C object esp-idf/esp_driver_cam/CMakeFiles/__idf_esp_driver_cam.dir/dvp_share_ctrl.c.obj
+[178/218] Linking C static library esp-idf\arduino-esp32\libarduino-esp32.a
+[179/218] Building C object esp-idf/esp_driver_touch_sens/CMakeFiles/__idf_esp_driver_touch_sens.dir/common/touch_sens_common.c.obj
+[180/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/src/esp_lcd_common.c.obj
+[181/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/src/esp_lcd_panel_io.c.obj
+[182/218] Building C object esp-idf/esp_driver_touch_sens/CMakeFiles/__idf_esp_driver_touch_sens.dir/hw_ver1/touch_version_specific.c.obj
+[183/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/src/esp_lcd_panel_nt35510.c.obj
+[184/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/src/esp_lcd_panel_ssd1306.c.obj
+[185/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/src/esp_lcd_panel_ops.c.obj
+[186/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/src/esp_lcd_panel_st7789.c.obj
+[187/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/i2c/esp_lcd_panel_io_i2c_v1.c.obj
+[188/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/i2c/esp_lcd_panel_io_i2c_v2.c.obj
+[189/218] Building C object esp-idf/nvs_sec_provider/CMakeFiles/__idf_nvs_sec_provider.dir/nvs_sec_provider.c.obj
+[190/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/spi/esp_lcd_panel_io_spi.c.obj
+[191/218] Building C object esp-idf/perfmon/CMakeFiles/__idf_perfmon.dir/xtensa_perfmon_access.c.obj
+[192/218] Building C object esp-idf/perfmon/CMakeFiles/__idf_perfmon.dir/xtensa_perfmon_masks.c.obj
+[193/218] Building C object esp-idf/perfmon/CMakeFiles/__idf_perfmon.dir/xtensa_perfmon_apis.c.obj
+[194/218] Building C object esp-idf/esp_lcd/CMakeFiles/__idf_esp_lcd.dir/i80/esp_lcd_panel_io_i2s.c.obj
+[195/218] Building C object esp-idf/rt/CMakeFiles/__idf_rt.dir/FreeRTOS_POSIX_mqueue.c.obj
+[196/218] Building C object esp-idf/rt/CMakeFiles/__idf_rt.dir/FreeRTOS_POSIX_utils.c.obj
+[197/218] Linking C static library esp-idf\SPIS\libSPIS.a
+[198/218] Building C object esp-idf/main/CMakeFiles/__idf_main.dir/http_client.c.obj
+FAILED: esp-idf/main/CMakeFiles/__idf_main.dir/http_client.c.obj 
+C:\Espressif\tools\xtensa-esp-elf\esp-14.2.0_20241119\xtensa-esp-elf\bin\xtensa-esp32-elf-gcc.exe -DBOARD_ESP32 -DESP_MDNS_VERSION_NUMBER=\"1.11.1\" -DESP_PLATFORM -DIDF_VER=\"GIT-NOTFOUND\" -DMBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\" -DSOC_MMU_PAGE_SIZE=CONFIG_MMU_PAGE_SIZE -DSOC_XTAL_FREQ_MHZ=CONFIG_XTAL_FREQ -D_GLIBCXX_HAVE_POSIX_SEMAPHORE -D_GLIBCXX_USE_POSIX_SEMAPHORE -D_GNU_SOURCE -D_POSIX_READER_WRITER_LOCKS -ID:/K210_Test_App/nina-fw/build_esp32/config -ID:/K210_Test_App/nina-fw/main -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_netif -ID:/IDF/.espressif/v5.5/esp-idf/components/newlib/platform_include -ID:/IDF/.espressif/v5.5/esp-idf/components/freertos/config/include -ID:/IDF/.espressif/v5.5/esp-idf/components/freertos/config/include/freertos -ID:/IDF/.espressif/v5.5/esp-idf/components/freertos/config/xtensa/include -ID:/IDF/.espressif/v5.5/esp-idf/components/freertos/FreeRTOS-Kernel/include -ID:/IDF/.espressif/v5.5/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include -ID:/IDF/.espressif/v5.5/esp-idf/components/freertos/FreeRTOS-Kernel/portable/xtensa/include/freertos -ID:/IDF/.espressif/v5.5/esp-idf/components/freertos/esp_additions/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/include/soc -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/include/soc/esp32 -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/dma/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/ldo/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/debug_probe/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/mspi_timing_tuning/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/mspi_timing_tuning/tuning_scheme_impl/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/power_supply/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/port/esp32/. -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_hw_support/port/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/heap/include -ID:/IDF/.espressif/v5.5/esp-idf/components/heap/tlsf -ID:/IDF/.espressif/v5.5/esp-idf/components/log/include -ID:/IDF/.espressif/v5.5/esp-idf/components/soc/include -ID:/IDF/.espressif/v5.5/esp-idf/components/soc/esp32 -ID:/IDF/.espressif/v5.5/esp-idf/components/soc/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/soc/esp32/register -ID:/IDF/.espressif/v5.5/esp-idf/components/hal/platform_port/include -ID:/IDF/.espressif/v5.5/esp-idf/components/hal/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/hal/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_rom/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_rom/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_rom/esp32/include/esp32 -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_rom/esp32 -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_common/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_system/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_system/port/soc -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_system/port/include/private -ID:/IDF/.espressif/v5.5/esp-idf/components/xtensa/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/xtensa/include -ID:/IDF/.espressif/v5.5/esp-idf/components/xtensa/deprecated_include -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/include -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/include/apps -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/include/apps/sntp -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/lwip/src/include -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/port/include -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/port/freertos/include -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/port/esp32xx/include -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/port/esp32xx/include/arch -ID:/IDF/.espressif/v5.5/esp-idf/components/lwip/port/esp32xx/include/sys -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/include/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/common/osi/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/common/api/include/api -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/common/btc/profile/esp/blufi/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/common/btc/profile/esp/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/common/hci_log/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/common/ble_log/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/common/tinycrypt/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bt/common/tinycrypt/port -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_timer/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_wifi/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_wifi/include/local -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_wifi/wifi_apps/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_wifi/wifi_apps/nan_app/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_event/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_phy/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_phy/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_netif/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_http_client/include -ID:/IDF/.espressif/v5.5/esp-idf/components/spiffs/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_partition/include -ID:/K210_Test_App/nina-fw/components/SPIS/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/variants/esp32 -ID:/K210_Test_App/nina-fw/components/arduino-esp32/cores/esp32 -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/ArduinoOTA/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/AsyncUDP/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/BLE/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/BluetoothSerial/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/DNSServer/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/EEPROM/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/ESP_SR/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/ESPmDNS/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Ethernet/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/FFat/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/FS/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/HTTPClient/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Insights/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/LittleFS/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Matter/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/NetBIOS/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Network/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/OpenThread/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/PPP/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Preferences/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/RainMaker/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/SD_MMC/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/SD/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/SimpleBLE/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/SPIFFS/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/SPI/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Ticker/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Update/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/WebServer/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/NetworkClientSecure/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/WiFi/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/WiFiProv/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Wire/src -ID:/K210_Test_App/nina-fw/components/arduino-esp32/libraries/Zigbee/src -ID:/IDF/.espressif/v5.5/esp-idf/components/spi_flash/include -ID:/IDF/.espressif/v5.5/esp-idf/components/mbedtls/port/include -ID:/IDF/.espressif/v5.5/esp-idf/components/mbedtls/mbedtls/include -ID:/IDF/.espressif/v5.5/esp-idf/components/mbedtls/mbedtls/library -ID:/IDF/.espressif/v5.5/esp-idf/components/mbedtls/esp_crt_bundle/include -ID:/IDF/.espressif/v5.5/esp-idf/components/mbedtls/mbedtls/3rdparty/everest/include -ID:/IDF/.espressif/v5.5/esp-idf/components/mbedtls/mbedtls/3rdparty/p256-m -ID:/IDF/.espressif/v5.5/esp-idf/components/mbedtls/mbedtls/3rdparty/p256-m/p256-m -ID:/IDF/.espressif/v5.5/esp-idf/components/wpa_supplicant/include -ID:/IDF/.espressif/v5.5/esp-idf/components/wpa_supplicant/port/include -ID:/IDF/.espressif/v5.5/esp-idf/components/wpa_supplicant/esp_supplicant/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_adc/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_adc/interface -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_adc/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_adc/deprecated/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_eth/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_spi/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_pm/include -ID:/IDF/.espressif/v5.5/esp-idf/components/http_parser -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_ringbuf/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_gptimer/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_usb_serial_jtag/include -ID:/IDF/.espressif/v5.5/esp-idf/components/driver/deprecated -ID:/IDF/.espressif/v5.5/esp-idf/components/driver/i2c/include -ID:/IDF/.espressif/v5.5/esp-idf/components/driver/touch_sensor/include -ID:/IDF/.espressif/v5.5/esp-idf/components/driver/twai/include -ID:/IDF/.espressif/v5.5/esp-idf/components/driver/touch_sensor/esp32/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_gpio/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_pcnt/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_mcpwm/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_ana_cmpr/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_i2s/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_sdmmc/include -ID:/IDF/.espressif/v5.5/esp-idf/components/sdmmc/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_sdspi/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_sdio/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_dac/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_rmt/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_tsens/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_sdm/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_i2c/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_uart/include -ID:/IDF/.espressif/v5.5/esp-idf/components/vfs/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_ledc/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_parlio/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_driver_twai/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_https_ota/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bootloader_support/include -ID:/IDF/.espressif/v5.5/esp-idf/components/bootloader_support/bootloader_flash/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_bootloader_format/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_app_format/include -ID:/K210_Test_App/nina-fw/managed_components/chmorgan__esp-libhelix-mp3/libhelix-mp3/pub -ID:/K210_Test_App/nina-fw/managed_components/espressif__esp-modbus/freemodbus/common/include -ID:/IDF/.espressif/v5.5/esp-idf/components/ieee802154/include -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_coex/include -ID:/K210_Test_App/nina-fw/managed_components/espressif__libsodium/port_include -ID:/K210_Test_App/nina-fw/managed_components/espressif__libsodium/libsodium/src/libsodium/include -ID:/K210_Test_App/nina-fw/managed_components/espressif__mdns/include -ID:/IDF/.espressif/v5.5/esp-idf/components/console -ID:/IDF/.espressif/v5.5/esp-idf/components/esp_vfs_console/include -ID:/K210_Test_App/nina-fw/managed_components/joltwallet__littlefs/include -ID:/K210_Test_App/nina-fw/managed_components/espressif__network_provisioning/include -ID:/IDF/.espressif/v5.5/esp-idf/components/protocomm/include/common -ID:/IDF/.espressif/v5.5/esp-idf/components/protocomm/include/security -ID:/IDF/.espressif/v5.5/esp-idf/components/protocomm/include/transports -ID:/IDF/.espressif/v5.5/esp-idf/components/protocomm/include/crypto/srp6a -ID:/IDF/.espressif/v5.5/esp-idf/components/protocomm/proto-c -ID:/K210_Test_App/nina-fw/boards -ID:/K210_Test_App/nina-fw/boards/esp32 -ID:/IDF/.espressif/v5.5/esp-idf/components/nvs_flash/include -mlongcalls -Wno-frame-address  -fno-builtin-memcpy -fno-builtin-memset -fno-builtin-bzero -fno-builtin-stpcpy -fno-builtin-strncpy -fdiagnostics-color=always -ffunction-sections -fdata-sections -Wall -Werror=all -Wno-error=unused-function -Wno-error=unused-variable -Wno-error=unused-but-set-variable -Wno-error=deprecated-declarations -Wextra -Wno-error=extra -Wno-unused-parameter -Wno-sign-compare -Wno-enum-conversion -gdwarf-4 -ggdb -Os -freorder-blocks -fmacro-prefix-map=D:/K210_Test_App/nina-fw=. -fmacro-prefix-map=D:/IDF/.espressif/v5.5/esp-idf=/IDF -fstrict-volatile-bitfields -fno-jump-tables -fno-tree-switch-conversion -std=gnu17 -Wno-old-style-declaration -DARDUINO=10812 -DARDUINO_ESP32_DEV -DARDUINO_ARCH_ESP32 -DARDUINO_BOARD=\"ESP32_DEV\" -DARDUINO_VARIANT=\"esp32\" -DESP32=ESP32 -MD -MT esp-idf/main/CMakeFiles/__idf_main.dir/http_client.c.obj -MF esp-idf\main\CMakeFiles\__idf_main.dir\http_client.c.obj.d -o esp-idf/main/CMakeFiles/__idf_main.dir/http_client.c.obj -c D:/K210_Test_App/nina-fw/main/http_client.c
+D:/K210_Test_App/nina-fw/main/http_client.c: In function 'downloadAndSaveFile':
+D:/K210_Test_App/nina-fw/main/http_client.c:16:24: error: 'scm' undeclared (first use in this function)
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                        ^~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:24: note: each undeclared identifier is reported only once for each function it appears in
+D:/K210_Test_App/nina-fw/main/http_client.c:16:28: error: 'history' undeclared (first use in this function)
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                            ^~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:36: error: 'item' undeclared (first use in this function)
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                    ^~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:40: error: expected ';' before ':' token
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                        ^
+      |                                        ;
+D:/K210_Test_App/nina-fw/main/http_client.c:16:43: error: invalid suffix "A" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                           ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:46: error: invalid suffix "CK210_Test_App" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                              ^~~~~~~~~~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:62: error: invalid suffix "Cnina" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                              ^~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:73: error: invalid suffix "B" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                         ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:76: error: invalid suffix "repositoryId" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                            ^~~~~~~~~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:94: error: invalid suffix "A" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                              ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:97: error: invalid suffix "scm0" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                 ^~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:107: error: invalid suffix "C" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                           ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:110: error: invalid suffix "historyItemId" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                              ^~~~~~~~~~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:129: error: invalid suffix "A" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                 ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:132: error: invalid suffix "b6824711e774adc3a3550926880ad5a879c5d1cf" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:178: error: invalid suffix "C" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                  ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:181: error: invalid suffix "historyItemParentId" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                     ^~~~~~~~~~~~~~~~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:206: error: invalid suffix "A" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                                              ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:209: error: invalid suffix "bd2dfa213b0bb05858942ed7929226478b68a8c" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                                                 ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:255: error: invalid suffix "C" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                                                                                               ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:258: error: invalid suffix "historyItemDisplayId" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                                                                                                  ^~~~~~~~~~~~~~~~~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:284: error: invalid suffix "A" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                                                                                                                            ^~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:287: error: invalid suffix "b682471" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                                                                                                                               ^~~~~~~~~
+D:/K210_Test_App/nina-fw/main/http_client.c:16:300: error: invalid suffix "D" on integer constant
+   16 |   if (buffer == NULL) {scm-history-item:d%3A%5CK210_Test_App%5Cnina-fw?%7B%22repositoryId%22%3A%22scm0%22%2C%22historyItemId%22%3A%22b6824711e774adc3a3550926880ad5a879c5d1cf%22%2C%22historyItemParentId%22%3A%227bd2dfa213b0bb05858942ed7929226478b68a8c%22%2C%22historyItemDisplayId%22%3A%22b682471%22%7D
+      |                                                                                                                                                                                                                                                                                                            ^~
+[199/218] Linking C static library esp-idf\cmock\libcmock.a
+[200/218] Linking C static library esp-idf\app_trace\libapp_trace.a
+[201/218] Linking C static library esp-idf\esp_driver_cam\libesp_driver_cam.a
+[202/218] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/sketch.ino.cpp.obj
+[203/218] Building CXX object esp-idf/main/CMakeFiles/__idf_main.dir/CommandHandler.cpp.obj
+ninja: build stopped: subcommand failed.

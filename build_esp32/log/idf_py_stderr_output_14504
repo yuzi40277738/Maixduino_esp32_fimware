@@ -1,0 +1,13 @@
+Command: cmake -G Ninja -DPYTHON_DEPS_CHECKED=1 -DPYTHON=C:\Espressif\tools\python\v5.5\venv\Scripts\python.exe -DESP_PLATFORM=1 -DBOARD=esp32 -DCCACHE_ENABLE=0 D:\K210_Test_App\nina-fw
+CMake Warning at D:/IDF/.espressif/v5.5/esp-idf/tools/cmake/git_submodules.cmake:4 (message):
+  Git executable was not found.  Git submodule checks will not be executed.
+  If you have any build issues at all, start by adding git executable to the
+  PATH and rerun cmake to not see this warning again.
+Call Stack (most recent call first):
+  D:/IDF/.espressif/v5.5/esp-idf/tools/cmake/idf.cmake:41 (include)
+  D:/IDF/.espressif/v5.5/esp-idf/tools/cmake/project.cmake:29 (include)
+  CMakeLists.txt:19 (include)
+
+
+ESP Insights Project commit: GIT-NOTFOUND
+ESP RainMaker Project commit: GIT-NOTFOUND

@@ -1,0 +1,7 @@
+source "D:/IDF/.espressif/v5.5/esp-idf/components/bootloader/Kconfig.projbuild"
+source "D:/IDF/.espressif/v5.5/esp-idf/components/esp_app_format/Kconfig.projbuild"
+source "D:/IDF/.espressif/v5.5/esp-idf/components/esp_rom/Kconfig.projbuild"
+source "D:/IDF/.espressif/v5.5/esp-idf/components/esptool_py/Kconfig.projbuild"
+source "D:/IDF/.espressif/v5.5/esp-idf/components/partition_table/Kconfig.projbuild"
+source "D:/K210_Test_App/nina-fw/components/arduino-esp32/Kconfig.projbuild"
+source "D:/K210_Test_App/nina-fw/managed_components/espressif__esp_rainmaker/Kconfig.projbuild"
