@@ -125,12 +125,12 @@ static esp_netif_recv_ret_t IRAM_ATTR apNetifInput_hook(void *input_netif_handle
 }
 
 }
-
+//替换为国内服务器
 static void _setupNTP(void) {
   esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
-  esp_sntp_setservername(0, (char*)"0.pool.ntp.org");
-  esp_sntp_setservername(1, (char*)"1.pool.ntp.org");
-  esp_sntp_setservername(2, (char*)"2.pool.ntp.org");
+  esp_sntp_setservername(0, (char*)"0.cn.pool.ntp.org");
+  esp_sntp_setservername(1, (char*)"1.time1.aliyun.com");
+  esp_sntp_setservername(2, (char*)"2.ntp.ntsc.ac.cn");
   esp_sntp_init();
 }
 
