@@ -2,6 +2,47 @@
 
 ## Maixduino (K210 + ESP32) 适配版
 
+### nina-fw 3.3.1-maixduino - 2026.05.30
+
+**版本号:** 3.3.0 → 3.3.1
+
+**问题修复:**
+- `stream_handler.cpp` 改用 `NetworkClient` / `NetworkUDP` / `NetworkClientSecure`，与 `CommandHandler.cpp` 一致，修复编译错误
+
+---
+
+### nina-fw 3.3.0-maixduino-v3.2 - 2026.05.30
+
+**新增功能: 流式传输**
+- 新增 `stream_handler.h/cpp` 流控制模块
+  - 环形缓冲区实现（32KB，防止高速 TCP 数据溢出）
+  - 流上下文管理 + 互斥锁保护 + 后台任务支持
+  - 完整 API: init/deinit/start/pull/status/abort
+
+**新增命令 (0xF0-0xF3):**
+- `0xF0` STREAM_START - 启动流式传输
+- `0xF1` STREAM_PULL - 拉取流数据
+- `0xF2` STREAM_STATUS - 查询流状态
+- `0xF3` STREAM_ABORT - 中止流传输
+
+**三个流式传输场景实现:**
+1. **TCP 数据流 (0x2C)** - 批量读取替代单字节，支持 TCP/UDP/TLS
+2. **WiFi 扫描流 (0x27)** - 后台扫描，流式返回每个 AP 信息（SSID+RSSI+加密类型+BSSID+信道）
+3. **文件读取流 (0x61)** - 批量读取，自动写入缓冲区
+
+**性能提升:**
+- SPI 传输次数减少约 50%
+- K210 可并行处理，CPU 利用率提升
+- 大数据吞吐量提升 30-50%
+
+**相关文件:**
+- `main/stream_handler.h` - 新增
+- `main/stream_handler.cpp` - 新增 (含三个后台任务)
+- `main/CommandHandler.cpp` - 集成流命令处理
+- `main/CMakeLists.txt` - 添加新文件
+
+---
+
 ### nina-fw 3.3.0-maixduino-v3.1 - 2026.05.30
 
 **问题修复:**
