@@ -280,3 +280,130 @@ idf.py -p COM14 -b 115200 build flash
 # 串口监视
 idf.py -p COM14 monitor
 ```
+
+---
+
+## 六、2026-05-30 MQTT TLS（Mosquitto CA 嵌入）编译与烧录
+
+**日期:** 2026-05-30  
+**项目:** `D:\K210_Test_App\nina-fw`（Maixduino NINA 固件，ESP32 + K210 SPI）  
+**分支:** `nina-fw-v1.1.0`  
+**Git 基线:** `e552cfc`（工作区另有未提交：MQTT CA 嵌入相关改动）  
+**目标板:** `esp32`（Maixduino，ESP32 口 **COM16**）  
+**构建目录:** `build/`  
+**IDF:** v5.5，`IDF_TOOLS_PATH=C:\Espressif\tools`
+
+### 6.1 改造目标
+
+| 项目 | 说明 |
+|------|------|
+| TLS 模式 | K210 经 SPI 下发 NINA **`TLS_MODE`**，连接 Mosquitto **8883** |
+| 鉴别方式 | **仅服务端鉴别**（单向 TLS）：ESP32 校验 Broker 的 `server.crt` |
+| 信任根 | 使用 **MQTT 服务端** 签发的 CA，拷贝为 `certs/ca.crt` 编译嵌入固件 |
+| 不做 | 在 ESP32 上生成 CA；不把 `ca.key` / `server.key` 打进固件 |
+
+### 6.2 证书核对（与 Mosquitto 服务端一致）
+
+**服务端配置目录（用户拷贝）:** `C:\Users\Administrator\Desktop\config`
+
+| 文件 | 用途 |
+|------|------|
+| `ca.crt` | 签发 CA（嵌入 ESP32） |
+| `server.crt` | Broker 证书（仅服务器使用） |
+| `server.key` / `ca.key` | 私钥（**勿**放入固件仓库） |
+| `mosquitto.conf` | `listener 8883`，`cafile` / `certfile` / `keyfile` 指向 `/mosquitto/config/` |
+
+**核对结果:**
+
+| 检查项 | 结果 |
+|--------|------|
+| `Desktop\config\ca.crt` → `nina-fw\certs\ca.crt` | ✅ 已覆盖为服务端同一份（SHA256 一致） |
+| `server.crt` 签发者 | ✅ `CN=mosquitto-ca`，与 `ca.crt` 一致 |
+| 原 `CA/ca.crt` 与桌面拷贝 | ⚠️ 曾不一致（本地多 22 字节，换行差异）；已用服务端文件替换 |
+
+`certs/ca.crt` SHA256: `6C60A5DC33A2339876FA5F4202189DFA05053E828924E5F361EBF2665EF274E9`
+
+### 6.3 代码改动摘要
+
+| 文件 | 改动 |
+|------|------|
+| `main/CMakeLists.txt` | 存在 `certs/ca.crt` 时 `EMBED_TXTFILES`，定义 `NINA_MQTT_CA_EMBED` |
+| `main/CommandHandler.cpp` | `TLS_MODE` 下 `setCACert(mqtt_ca_crt)`；否则仍用 Mozilla 根证书包 |
+| `certs/ca.crt` | 从 Mosquitto 服务器拷贝 |
+| `certs/README.md` | MQTT 单向 TLS 说明 |
+| `CA/ca.crt` | 已删除（迁至 `certs/`） |
+
+### 6.4 编译
+
+**命令:**
+
+```powershell
+$env:IDF_TOOLS_PATH = "C:\Espressif\tools"
+$env:IDF_PATH = "D:\IDF\.espressif\v5.5\esp-idf"
+cd D:\K210_Test_App\nina-fw
+idf.py -B build -DBOARD=esp32 build
+```
+
+**结果:** ✅ 成功
+
+| 文件 | 大小 | 状态 |
+|------|------|------|
+| `build/nina-fw.bin` | 0xfe380 (1041280 B) | ✅ 已生成 |
+| `build/nina-fw.elf` | - | ✅ 已生成 |
+| `build/bootloader/bootloader.bin` | 0x4710 (18 KB) | ✅ 已生成 |
+| `build/partition_table/partition-table.bin` | 0xC00 (3 KB) | ✅ 已生成 |
+| `build/ca.crt.S` / `_binary_ca_crt_*` | 已链接进 `libmain` | ✅ CA 已嵌入 |
+
+**固件分区占用:** 0xfe380 / 0x180000 bytes（约 66% 已用，34% 空闲）
+
+### 6.5 烧录
+
+**ESP32 串口:** COM16（用户确认；此前 COM14 在本机不可用）
+
+**命令:**
+
+```powershell
+$env:IDF_TOOLS_PATH = "C:\Espressif\tools"
+cd D:\K210_Test_App\nina-fw
+idf.py -B build -DBOARD=esp32 -p COM16 -b 115200 flash
+```
+
+#### 烧录尝试记录
+
+| 序号 | 端口 | 结果 | 说明 |
+|------|------|------|------|
+| 1 | COM14 | ❌ 失败 | 端口不存在 |
+| 2 | COM16 | ❌ 失败 | `Invalid head of packet` / `No serial data received`（未进下载模式） |
+| 3 | COM16 | ✅ 成功 | 用户配合 BOOT+RESET 后重试 |
+
+#### 成功烧录详情（2026-05-30）
+
+| 文件 | 地址 | 原始大小 | 压缩后 | 校验 |
+|------|------|----------|--------|------|
+| `bootloader/bootloader.bin` | 0x1000 | 0x4710 | - | Hash verified |
+| `nina-fw.bin` | 0x30000 | 1041280 B | 672094 B（约 60.8 s） | Hash verified |
+| `partition_table/partition-table.bin` | 0x8000 | 3072 B | 135 B | Hash verified |
+
+**结束后:** esptool 经 RTS 硬复位，设备自动重启。
+
+### 6.6 验证建议
+
+1. K210 网关 Web：**TLS** 开启，端口 **8883**，Broker 主机名与 Mosquitto `server.crt` CN/SAN 一致。  
+2. Mosquitto 监听 `8883`，`require_certificate false`（仅服务端证书）。  
+3. 不要用 `setClientCert` / `setCertKey`（除非需要双向 TLS）。
+
+### 6.7 常用命令（COM16）
+
+```powershell
+$env:IDF_TOOLS_PATH = "C:\Espressif\tools"
+cd D:\K210_Test_App\nina-fw
+
+# 仅编译
+idf.py -B build -DBOARD=esp32 build
+
+# 烧录
+idf.py -B build -DBOARD=esp32 -p COM16 -b 115200 flash
+
+# 编译 + 烧录
+idf.py -B build -DBOARD=esp32 -p COM16 -b 115200 build flash
+```

@@ -47,6 +47,17 @@ combine.py：修复 UTF-8 编码报错，提升脚本兼容性
 基于 ESP-IDF 5.x 编译，不兼容低版本 IDF
 直接编译烧录至 ESP32 协处理器即可使用
 网络连接失败时，优先使用国内 MQTT 服务器 + 开放端口
+
+### MQTT TLS（Mosquitto 8883 + 自签 CA）
+
+K210 网关经 SPI 下发 **`TLS_MODE`**；ESP32 用编译内置的 **`ca.crt`** 校验 Broker 的 `server.crt`（**非** Web 动态下发）。
+
+1. 从 Mosquitto 服务器复制 **`ca.crt`** → `certs/ca.crt`（**不要**拷贝 `ca.key` / `server.key`）
+2. `idf.py -DBOARD=esp32 build` → `combine.py` → 烧录 ESP32
+3. K210 网关 Web 勾选 **TLS**、Port **8883**
+
+详见 `certs/README.md` 与网关仓库 `docs/MQTT_TLS_MOSQUITTO.md`。
+
 文件结构说明
 ```
 plaintext
@@ -54,10 +65,13 @@ nina-fw/
 ├── boards/esp32/board.h       # SPI 硬件引脚配置
 ├── main/
 │   ├── sketch.ino.cpp         # 固件入口，核心模式修改
-│   ├── CommandHandler.cpp/.h  # WiFi/网络指令处理
-│   ├── CMakeLists.txt         # 编译依赖配置
+│   ├── CommandHandler.cpp/.h  # WiFi/网络指令处理（含 TLS_MODE + ca.crt）
+│   ├── CMakeLists.txt         # 编译依赖配置（存在 certs/ca.crt 时嵌入）
 │   ├── http_client.c          # HTTP 客户端功能
 │   └── 其他源码文件
+├── certs/
+│   ├── README.md              # MQTT TLS：嵌入 Mosquitto ca.crt
+│   └── ca.crt                 # 从 Mosquitto 服务器拷贝（勿提交 ca.key）
 ├── Makefile                   # 编译脚本
 ├── combine.py                 # 固件打包脚本（编码修复）
 └── .vscode/                   # VS Code + ESP-IDF 配置

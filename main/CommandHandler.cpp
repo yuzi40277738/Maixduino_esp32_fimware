@@ -64,7 +64,7 @@ int errno;
 // Note: following version definition line is parsed by python script. Please don't change its format (space, indent) only update its version number.
 // ADAFRUIT-CHANGE: not fixed length
 // The version number obeys semver rules. We suffix with "+adafruit" to distinguish from Arduino NINA-FW.
-const char FIRMWARE_VERSION[] = "3.3.0";
+const char FIRMWARE_VERSION[] = "2.0.0-TLS";
 
 // ADAFRUIT-CHANGE: user-supplied cert and key
 // Optional, user-defined X.509 certificate
@@ -99,6 +99,12 @@ NetworkClientSecure tlsClients[MAX_SOCKETS];
 // the default bundle explicitly.
 extern const uint8_t x509_crt_imported_bundle_bin_start[] asm("_binary_x509_crt_bundle_start");
 extern const uint8_t x509_crt_imported_bundle_bin_end[]   asm("_binary_x509_crt_bundle_end");
+
+#ifdef NINA_MQTT_CA_EMBED
+// CA copied from the MQTT broker: used to verify the server certificate (one-way TLS).
+extern const uint8_t mqtt_ca_crt_pem_start[] asm("_binary_ca_crt_start");
+extern const uint8_t mqtt_ca_crt_pem_end[]   asm("_binary_ca_crt_end");
+#endif
 
 // Reasons for STA disconnect.
 static uint8_t _disconnectReason = WIFI_REASON_UNSPECIFIED;
@@ -908,9 +914,14 @@ int startClientTcp(const uint8_t command[], uint8_t response[])
       tlsClients[socket].setCertificate(CERT_BUF);
       tlsClients[socket].setPrivateKey(PK_BUFF);
     } else {
-      // Use default certificate bundle and pass its size, as required.
+#ifdef NINA_MQTT_CA_EMBED
+      // Server authentication only: verify broker server.crt against CA from the broker.
+      tlsClients[socket].setCACert(reinterpret_cast<const char*>(mqtt_ca_crt_pem_start));
+#else
+      // Public HTTPS: Mozilla/ESP root bundle.
       tlsClients[socket].setCACertBundle(x509_crt_imported_bundle_bin_start,
                                          x509_crt_imported_bundle_bin_end - x509_crt_imported_bundle_bin_start);
+#endif
     }
     if (host[0] != '\0') {
       result = tlsClients[socket].connect(host, port);
