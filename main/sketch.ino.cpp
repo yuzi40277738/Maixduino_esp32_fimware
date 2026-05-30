@@ -15,6 +15,7 @@ extern "C" {
   #include <esp_bt.h>
   #include "esp_spiffs.h"
   #include "nvs_flash.h"
+  #include "esp_sntp.h"
   #include <stdio.h>
   #include <sys/types.h>
   #include <dirent.h>
@@ -29,16 +30,22 @@ extern "C" {
 
 #define SPI_BUFFER_LEN SPI_MAX_DMA_LEN
 
-// 调试输出默认开启
-int debug = 1;
+#define LOG_LEVEL_ERROR  1
+#define LOG_LEVEL_INFO   2
+#define LOG_LEVEL_DEBUG  3
 
-// 定义硬件版本宏（用于蓝牙部分，但蓝牙已禁用）
+int debugLevel = LOG_LEVEL_INFO;
+
+#define NINA_PRINTF(...)    do { if (debugLevel >= LOG_LEVEL_INFO)  { ets_printf(__VA_ARGS__); } } while (0)
+#define NINA_ERROR(...)     do { if (debugLevel >= LOG_LEVEL_ERROR) { ets_printf("[ERROR] " __VA_ARGS__); } } while (0)
+#define NINA_DEBUG(...)     do { if (debugLevel >= LOG_LEVEL_DEBUG) { ets_printf("[DEBUG] " __VA_ARGS__); } } while (0)
+
 #define UNO_WIFI_REV2   1
 
 #include "board.h"
 
 #define AIRLIFT 1
-#define NINA_PRINTF(...) do { if (debug) { ets_printf(__VA_ARGS__); } } while (0)
+#define debug  (debugLevel >= LOG_LEVEL_INFO)
 
 #if defined(CONFIG_IDF_TARGET_ESP32)
   extern const struct __sFILE_fake __sf_fake_stdin;
@@ -66,8 +73,8 @@ void dumpBuffer(const char* label, uint8_t data[], int length) {
 }
 
 void setDebug(int d) {
-  debug = d;
-  if (debug) {
+  debugLevel = d;
+  if (debugLevel >= LOG_LEVEL_INFO) {
     PIN_FUNC_SELECT(GPIO_PIN_MUX_REG[1], 0);
     PIN_FUNC_SELECT(GPIO_PIN_MUX_REG[3], 0);
     const char* default_uart_dev = "/dev/uart/0";
@@ -101,6 +108,8 @@ void setupBluetooth();   // 保留声明但不再调用
 void setup() {
 #ifndef CMAKE_BUILD_TYPE_DEBUG
   setDebug(0);
+#else
+  setDebug(LOG_LEVEL_DEBUG);
 #endif
 
 #if !AIRLIFT
@@ -199,7 +208,18 @@ void setupWiFi() {
 }
 
 void loop() {
-  // 等待 SPI 命令（使用超时，让 WiFi 后台任务有机会运行）
+  static uint32_t lastNTPSyncCheck = 0;
+  const uint32_t NTP_SYNC_INTERVAL_MS = 12 * 60 * 60 * 1000;
+
+  uint32_t now = millis();
+  if (now - lastNTPSyncCheck > NTP_SYNC_INTERVAL_MS) {
+    if (WiFi.status() == WL_CONNECTED) {
+      esp_sntp_stop();
+      esp_sntp_init();
+    }
+    lastNTPSyncCheck = now;
+  }
+
   memset(commandBuffer, 0x00, SPI_BUFFER_LEN);
   int commandLength = SPIS.transfer(NULL, commandBuffer, SPI_BUFFER_LEN);
 

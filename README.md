@@ -42,11 +42,43 @@ combine.py：修复 UTF-8 编码报错，提升脚本兼容性
 ✅ DNS 域名解析（自带备用 DNS）
 ✅ SPI 与 K210 高速通信
 ✅ 兼容标准 NINA 协议指令
+✅ NTP 网络时间同步（国内服务器，自动重同步）
+✅ 调试日志分级（0-3 级）
+
+### NTP 时间同步（K210 端使用方式）
+
+| 命令 | 命令号 | 说明
+|------|---------|------
+| `getNTPStatus` | `0x38` | 查询 NTP 同步状态（1=已同步, 0=未同步）
+| `getTime` | `0x3B` | 获取 **UTC** Unix 时间戳（秒）
+
+**重要说明：**
+- `getTime(0x3B)` 返回的是 **UTC 时间戳**（自 1970-01-01 00:00:00 UTC 以来的秒数）
+- 如需转换为北京时间，K210 端需自行 **+ 8 * 3600 秒**
+
+使用建议：
+1. 先调用 `getNTPStatus(0x38)` 确认同步成功（返回 1）
+2. 再调用 `getTime(0x3B)` 获取 UTC 时间戳
+3. K210 端按需转换时区：`beijing_time = utc_time + 8 * 3600`
+
 使用说明
 本固件仅用于 Maixduino/K210 开发板，不可用于其他 ESP32 硬件
 基于 ESP-IDF 5.x 编译，不兼容低版本 IDF
 直接编译烧录至 ESP32 协处理器即可使用
 网络连接失败时，优先使用国内 MQTT 服务器 + 开放端口
+
+### Windows 编译与烧录
+
+本机 ESP-IDF 5.5（EIM 安装）的完整步骤、工具调用与 COM 口烧录参数见 **[docs/BUILD_FLASH_WINDOWS.md](docs/BUILD_FLASH_WINDOWS.md)**。
+
+快速命令（PowerShell，串口以 COM16 为例）：
+
+```powershell
+. C:\Espressif\tools\Microsoft.v5.5.PowerShell_profile.ps1
+cd D:\K210_Test_App\nina-fw
+idf.py -DBOARD=esp32 build
+esptool.py --chip esp32 -p COM16 -b 115200 --connect-attempts 30 --before default_reset --after hard_reset write_flash --flash_mode dio --flash_freq 40m --flash_size 2MB 0x1000 build/bootloader/bootloader.bin 0x30000 build/nina-fw.bin 0x8000 build/partition_table/partition-table.bin
+```
 
 ### MQTT TLS（Mosquitto 8883 + 自签 CA）
 
@@ -76,6 +108,80 @@ nina-fw/
 ├── combine.py                 # 固件打包脚本（编码修复）
 └── .vscode/                   # VS Code + ESP-IDF 配置
 ```
+## NINA 命令参考 (K210 端)
+
+### 🔧 常用命令速查
+
+| 用途 | 命令名 | 命令号 |
+|------|---------|--------|
+| 连接 WiFi (WPA) | `setPassPhrase` | 0x11 |
+| 查询 NTP 同步状态 | `getNTPStatus` | **0x38** ✨ |
+| 获取时间戳 (北京时间) | `getTime` | 0x3B |
+| 获取 IP 地址 | `getIPaddr` | 0x21 |
+| 获取连接状态 | `getConnStatus` | 0x20 |
+| 域名解析 | `reqHostByName` → `getHostByName` | 0x34 → 0x35 |
+
+### 📋 完整命令列表
+
+#### WiFi 配置 (0x10-0x1F)
+
+| 命令号 | 命令名 | 说明 |
+|---------|---------|------|
+| 0x10 | `setNet` | 连接开放 WiFi |
+| 0x11 | `setPassPhrase` | 连接加密 WiFi (WPA/WPA2) |
+| 0x12 | `setKey` | 连接 WEP 加密 WiFi |
+| 0x14 | `setIPconfig` | 设置静态 IP |
+| 0x15 | `setDNSconfig` | 设置 DNS 服务器 |
+| 0x16 | `setHostname` | 设置主机名 |
+| 0x1A | `setDebug` | 设置调试级别 (0-3) |
+
+#### WiFi 查询 (0x20-0x2F)
+
+| 命令号 | 命令名 | 说明 |
+|---------|---------|------|
+| 0x20 | `getConnStatus` | 获取连接状态 |
+| 0x21 | `getIPaddr` | 获取 IP 地址 |
+| 0x22 | `getMACaddr` | 获取 MAC 地址 |
+| 0x23 | `getCurrSSID` | 获取当前 SSID |
+| 0x25 | `getCurrRSSI` | 获取信号强度 |
+
+#### 网络查询 (0x30-0x3F)
+
+| 命令号 | 命令名 | 说明 |
+|---------|---------|------|
+| 0x30 | `disconnect` | 断开 WiFi |
+| 0x35 | `getHostByName` | 获取域名解析结果 |
+| 0x37 | `getFwVersion` | 获取固件版本 |
+| **0x38** | **`getNTPStatus`** | **NTP 同步状态 (0=未同步, 1=已同步)** |
+| 0x3B | `getTime` | **UTC** Unix 时间戳（秒） |
+| 0x3E | `ping` | Ping 测试 |
+
+#### TCP/UDP (0x28-0x2F, 0x39)
+
+| 命令号 | 命令名 | 说明 |
+|---------|---------|------|
+| 0x2D | `startClientTcp` | 启动 TCP 客户端 |
+| 0x2C | `getDataTcp` | 接收 TCP 数据 |
+| 0x39 | `sendUDPdata` | 发送 UDP 数据 |
+
+#### GPIO 控制 (0x50-0x54)
+
+| 命令号 | 命令名 | 说明 |
+|---------|---------|------|
+| 0x50 | `setPinMode` | 设置引脚模式 |
+| 0x51 | `setDigitalWrite` | 数字输出 |
+| 0x53 | `getDigitalRead` | 数字输入 |
+
+#### 文件系统 (0x60-0x67)
+
+| 命令号 | 命令名 | 说明 |
+|---------|---------|------|
+| 0x60 | `writeFile` | 写入文件 |
+| 0x61 | `readFile` | 读取文件 |
+| 0x62 | `deleteFile` | 删除文件 |
+
+---
+
 总结
 本修改版 nina-fw 彻底解决了 K210 + ESP32 平台上：
 SPI 通信异常

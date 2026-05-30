@@ -1,5 +1,52 @@
 # Changelog
 
+## Maixduino (K210 + ESP32) 适配版
+
+### nina-fw 3.3.0-maixduino-v3.1 - 2026.05.30
+
+**问题修复:**
+- 移除不必要的时区设置代码：`time()` 函数始终返回 UTC 时间戳，TZ 环境变量不影响其返回值
+- 明确文档：`getTime(0x3B)` 返回 UTC 时间戳，K210 端需自行 `+ 8*3600` 转换为北京时间
+
+### nina-fw 3.3.0-maixduino-v3 - 2026.05.30
+
+**新增功能:**
+- 新增 `getNTPStatus` 命令 (0x38) - 查询 NTP 同步状态 (1=已同步, 0=未同步)
+- NTP 每 12 小时自动重同步，防止长时间运行后时间漂移
+- 调试日志分级支持 (0=关闭, 1=错误, 2=信息, 3=调试)
+
+**优化改进:**
+- WiFi 连接异步化：避免重复初始化 NTP 和事件处理器
+- 增强 `getTime()` 时间戳合法性检查（增加上限 2100-01-01）
+- NTP 服务器使用国内源（cn.pool.ntp.org, aliyun.com, ntsc.ac.cn）
+
+**相关文件:**
+- `main/CommandHandler.cpp` - 新增 getNTPStatus 函数、WiFi 初始化标志
+- `main/sketch.ino.cpp` - NTP 定时重同步、日志分级宏
+
+---
+
+### nina-fw 3.3.0-maixduino-v2 - 2026.05.xx
+
+**核心修改:**
+- 适配 ESP-IDF 5.x 编译环境
+- 修复 DNS 解析失败问题，新增备用 DNS (8.8.8.8)
+- NTP 服务器改为国内源 (cn.pool.ntp.org, aliyun.com, ntsc.ac.cn)
+
+---
+
+### nina-fw 3.3.0-maixduino-v1 - 首次适配
+
+**硬件适配:**
+- SPI 引脚重定义: MOSI=14, BUSY=25（匹配 K210 硬件）
+- 强制 WiFi 模式，禁用蓝牙功能
+
+**网络功能:**
+- MQTT TLS 支持（嵌入 ca.crt 证书）
+- 兼容标准 NINA 协议指令
+
+---
+
 ## Adafruit firmware
 
 Adafruit's Arduino NINA-W102 firmware 1.7.7 - 2023.09.20

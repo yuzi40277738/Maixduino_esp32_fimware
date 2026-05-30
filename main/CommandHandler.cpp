@@ -39,6 +39,7 @@
 
 #include "esp_log.h"
 #include "esp_sntp.h"
+#include <stdlib.h>
 
 // Socket types
 #define TCP_MODE 0x00
@@ -79,6 +80,8 @@ bool setPSK = 0;
 uint32_t resolvedHostname;
 
 #define MAX_SOCKETS CONFIG_LWIP_MAX_SOCKETS
+
+static bool _wifiInitialized = false;
 
 uint8_t socketTypes[MAX_SOCKETS];
 // Tracks whether this slot has ever successfully completed a TCP/TLS connect().
@@ -263,14 +266,17 @@ int setNet(const uint8_t command[], uint8_t response[])
   memset(ssid, 0x00, sizeof(ssid));
   memcpy(ssid, &command[4], command[3]);
 
-  // 先构建响应，再启动 WiFi
   response[2] = 1;
   response[3] = 1;
   response[4] = 1;
 
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid);
-  _setupAfterWifiBegin();
+
+  if (!_wifiInitialized) {
+    _setupAfterWifiBegin();
+    _wifiInitialized = true;
+  }
 
   return 6;
 }
@@ -286,14 +292,17 @@ int setPassPhrase(const uint8_t command[], uint8_t response[])
   memcpy(ssid, &command[4], command[3]);
   memcpy(pass, &command[5 + command[3]], command[4 + command[3]]);
 
-  // 先构建响应，再启动 WiFi
   response[2] = 1;
   response[3] = 1;
   response[4] = 1;
 
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, pass);
-  _setupAfterWifiBegin();
+
+  if (!_wifiInitialized) {
+    _setupAfterWifiBegin();
+    _wifiInitialized = true;
+  }
 
   return 6;
 }
@@ -1153,18 +1162,36 @@ int getTime(const uint8_t command[], uint8_t response[])
 {
   time_t now;
 
-  // Same logic as in old WiFi.getTime();
   time(&now);
-  if (now < 946684800) {
+
+  const time_t MIN_VALID_TIMESTAMP = 946684800;
+  const time_t MAX_VALID_TIMESTAMP = 4102444800;
+
+  if (now < MIN_VALID_TIMESTAMP || now > MAX_VALID_TIMESTAMP) {
     now = 0;
   }
 
-  response[2] = 1; // number of parameters
-  response[3] = sizeof(now); // parameter 1 length
+  response[2] = 1;
+  response[3] = sizeof(now);
 
   memcpy(&response[4], &now, sizeof(now));
 
   return 5 + sizeof(now);
+}
+
+int getNTPStatus(const uint8_t command[], uint8_t response[])
+{
+  time_t now;
+  time(&now);
+
+  const time_t MIN_VALID_TIMESTAMP = 946684800;
+  uint8_t status = (now >= MIN_VALID_TIMESTAMP) ? 1 : 0;
+
+  response[2] = 1;
+  response[3] = 1;
+  response[4] = status;
+
+  return 6;
 }
 
 int getIdxBSSID(const uint8_t command[], uint8_t response[])
@@ -2485,7 +2512,7 @@ const CommandHandlerType commandHandlers[] = {
   getConnStatus, getIPaddr, getMACaddr, getCurrSSID, getCurrBSSID, getCurrRSSI, getCurrEnct, scanNetworks, startServerTcp, getStateTcp, dataSentTcp, availDataTcp, getDataTcp, startClientTcp, stopClientTcp, getClientStateTcp,
 
   // 0x30 -> 0x3f
-  disconnect, NULL, getIdxRSSI, getIdxEnct, reqHostByName, getHostByName, startScanNetworks, getFwVersion, NULL, sendUDPdata, getRemoteData, getTime, getIdxBSSID, getIdxChannel, ping, getSocket,
+  disconnect, NULL, getIdxRSSI, getIdxEnct, reqHostByName, getHostByName, startScanNetworks, getFwVersion, getNTPStatus, sendUDPdata, getRemoteData, getTime, getIdxBSSID, getIdxChannel, ping, getSocket,
 
   // 0x40 -> 0x4f
   // ADAFRUIT-CHANGE
@@ -2528,7 +2555,7 @@ const char* commandStrings[] = {
   // 0x20 -> 0x2f
   "getConnStatus", "getIPaddr", "getMACaddr", "getCurrSSID", "getCurrBSSID", "getCurrRSSI", "getCurrEnct", "scanNetworks", "startServerTcp", "getStateTcp", "dataSentTcp", "availDataTcp", "getDataTcp", "startClientTcp", "stopClientTcp", "getClientStateTcp",
   // 0x30 -> 0x3f
-  "disconnect", NULL, "getIdxRSSI", "getIdxEnct", "reqHostByName", "getHostByName", "startScanNetworks", "getFwVersion", NULL, "sendUDPdata", "getRemoteData", "getTime", "getIdxBSSID", "getIdxChannel", "ping", "getSocket",
+  "disconnect", NULL, "getIdxRSSI", "getIdxEnct", "reqHostByName", "getHostByName", "startScanNetworks", "getFwVersion", "getNTPStatus", "sendUDPdata", "getRemoteData", "getTime", "getIdxBSSID", "getIdxChannel", "ping", "getSocket",
   // 0x40 -> 0x4f
   "setClientCert", "setCertKey", NULL, NULL, "sendDataTcp", "getDataBufTcp", "insertDataBuf", NULL, NULL, NULL, "wpa2EntSetIdentity", "wpa2EntSetUsername", "wpa2EntSetPassword", "wpa2EntSetCACert", "wpa2EntSetCertKey", "wpa2EntEnable",
   // 0x50 -> 0x5f
