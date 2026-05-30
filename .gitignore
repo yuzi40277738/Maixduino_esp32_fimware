@@ -9,7 +9,6 @@ sdkconfig.*.old
 sdkconfig.old
 managed_components/
 
-# Mosquitto deploy pack: never commit private keys or editor backups
-certs/config/*.key
+# Mosquitto deploy pack: ignore editor backups only
 certs/config/*.save
 certs/config/*.save.*
