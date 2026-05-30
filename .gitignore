@@ -8,3 +8,8 @@ sdkconfig.esp32c6
 sdkconfig.*.old
 sdkconfig.old
 managed_components/
+
+# Mosquitto deploy pack: never commit private keys or editor backups
+certs/config/*.key
+certs/config/*.save
+certs/config/*.save.*
