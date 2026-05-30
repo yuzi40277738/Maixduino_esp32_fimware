@@ -407,3 +407,19 @@ idf.py -B build -DBOARD=esp32 -p COM16 -b 115200 flash
 # 编译 + 烧录
 idf.py -B build -DBOARD=esp32 -p COM16 -b 115200 build flash
 ```
+
+### 6.8 `certs/config/` 部署包与证书分工（2026-05-30 记录）
+
+**目的:** 团队分发 Mosquitto 8883 配置，与已烧录 NINA（内嵌 `certs/ca.crt`）一致。
+
+| 角色 | 需要的文件 |
+|------|------------|
+| **ESP32 固件** | 仅 `certs/ca.crt` → 编译嵌入，`setCACert` 校验 Broker |
+| **Mosquitto 部署** | `ca.crt`、`server.crt`、`server.key`、`mosquitto.conf`（见 `certs/config/`） |
+| **CA 续签** | 额外需要 `ca.key`（仅管证书人员，非每台 Broker 必需） |
+
+**要点:**
+
+- 固件**不**包含私钥；`server.key` 仅 Broker 本机使用。
+- 接收方**不能**自造另一套 CA/server 证书仍期望连上已烧录固件，除非同 CA 重签或更新固件 `ca.crt` 并重烧。
+- Git：`3b1ac24` 证书与配置；`6c1cfe5` 含 `ca.key`、`server.key`（团队部署）。详见 `certs/README.md`。
