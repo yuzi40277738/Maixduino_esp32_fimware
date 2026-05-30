@@ -71,3 +71,212 @@ python -m esptool --chip esp32 -b 460800 --before default_reset --after hard_res
 - **ESP-IDF 路径:** D:\IDF\.espressif\v5.5\esp-idf
 - **Python 环境:** C:\Espressif\tools\python\v5.5\venv
 - **构建系统:** Ninja + CMake 3.30.2
+
+---
+
+## 五、2026-05-25 编译与烧录记录
+
+**日期:** 2026-05-25
+**Git 提交:** `873dd3a` — //替换为国内服务器
+**目标板:** esp32 (Maixduino / K210 + ESP32)
+**构建目录:** `build/`（非 `build_esp32/`）
+
+### 5.1 编译
+
+**命令:**
+```powershell
+$env:IDF_TOOLS_PATH = "C:\Espressif\tools"
+idf.py -B build -DBOARD=esp32 fullclean
+idf.py -B build -DBOARD=esp32 build
+```
+
+**结果:** ✅ 成功（约 24 分钟）
+
+| 文件 | 大小 | 状态 |
+|------|------|------|
+| `build/nina-fw.bin` | 0x10f380 (1.08 MB) | ✅ 已生成 |
+| `build/nina-fw.elf` | - | ✅ 已生成 |
+| `build/bootloader/bootloader.bin` | 0x4710 (18 KB) | ✅ 已生成 |
+| `build/partition_table/partition-table.bin` | 0xC00 (3 KB) | ✅ 已生成 |
+
+**固件分区占用:** 0x10f380 / 0x180000 bytes (71% 已用, 29% 空闲)
+**Bootloader 占用:** 0x4710 / 0x10000 bytes (63% 已用, 37% 空闲)
+
+**编译前问题:** 首次 `idf.py build` 因 CMake 缓存路径不一致失败（旧路径 `d:/nina-fw` vs 当前 `D:/K210_Test_App/nina-fw`），`fullclean` 后重建成功。
+
+**环境变量:** 需设置 `IDF_TOOLS_PATH=C:\Espressif\tools`（否则报 `espidf.constraints.v5.5.txt` 不存在）。
+
+### 5.2 烧录
+
+#### 烧录尝试记录
+
+| 序号 | 工具 | 端口 | 波特率 | 结果 | 错误 / 说明 |
+|------|------|------|--------|------|-------------|
+| 1 | idf.py | COM13 | 460800 | ❌ 失败 | `Failed to connect to ESP32: No serial data received`（误用 K210 口） |
+| 2 | ESP Flash Download Tool | COM13 | 高波特率 | ❌ 失败 | `8-download data fail`（通信不稳定，端口或波特率不对） |
+| 3 | idf.py | COM14 | 115200 | ✅ 成功 | 识别 ESP32-D0WDQ6，三文件 Hash verified |
+
+#### 成功烧录命令（idf.py）
+
+```powershell
+$env:IDF_TOOLS_PATH = "C:\Espressif\tools"
+idf.py -B build -DBOARD=esp32 -p COM14 -b 115200 flash
+```
+
+等效 esptool 命令（在 `build/` 目录下执行）：
+
+```powershell
+python -m esptool --chip esp32 -p COM14 -b 115200 ^
+  --before default_reset --after hard_reset write_flash ^
+  --flash_mode dio --flash_freq 40m --flash_size 2MB ^
+  0x1000 bootloader/bootloader.bin ^
+  0x8000 partition_table/partition-table.bin ^
+  0x30000 nina-fw.bin
+```
+
+或使用 `build/flash_args` 一键烧录：
+
+```powershell
+cd build
+python -m esptool --chip esp32 -p COM14 -b 115200 --before default_reset --after hard_reset write_flash @flash_args
+```
+
+`build/flash_args` 内容：
+
+```
+--flash_mode dio --flash_freq 40m --flash_size 2MB
+0x1000 bootloader/bootloader.bin
+0x30000 nina-fw.bin
+0x8000 partition_table/partition-table.bin
+```
+
+#### ESP Flash Download Tool 配置（GUI 烧录）
+
+| 配置项 | 值 |
+|--------|-----|
+| chipType | ESP32 |
+| COM 口 | **COM14**（ESP32 口，非 K210 的 COM13） |
+| BAUD | **115200**（失败时可试 74880） |
+| SPI SPEED | 40 MHz |
+| SPI MODE | DIO |
+| Flash Size | 2 MB |
+
+| 文件路径 | 烧录地址 | 说明 |
+|----------|----------|------|
+| `build/bootloader/bootloader.bin` | `0x1000` | Bootloader，大小 0x4710（约 18 KB） |
+| `build/partition_table/partition-table.bin` | `0x8000` | 分区表 |
+| `build/nina-fw.bin` | `0x30000` | 主应用固件，大小 0x10f380（约 1.08 MB） |
+
+**常见报错:** `8-download data fail` → 降低波特率至 115200，确认 COM 口为 ESP32，检查 USB 数据线。
+
+#### 设备信息（2026-05-25 烧录时 esptool 识别）
+
+| 项目 | 值 |
+|------|-----|
+| 芯片 | ESP32-D0WDQ6 (revision v1.0) |
+| 特性 | WiFi, BT, Dual Core, 240 MHz |
+| 晶振 | 40 MHz |
+| MAC 地址 | `24:6f:28:95:5e:70` |
+| esptool 版本 | v4.12.dev2 |
+
+#### 写入详情与校验
+
+| 文件 | 地址 | 原始大小 | 压缩后 | 耗时 | Hash |
+|------|------|----------|--------|------|------|
+| `bootloader/bootloader.bin` | 0x1000 | 18192 B (0x4710) | 12290 B | 1.4 s | ✅ verified |
+| `nina-fw.bin` | 0x30000 | 1110912 B (0x10f380) | 727748 B | 65.8 s | ✅ verified |
+| `partition_table/partition-table.bin` | 0x8000 | 3072 B (0xC00) | 135 B | 0.1 s | ✅ verified |
+
+**Flash 擦除范围:**
+- 0x00001000 ~ 0x00005fff（bootloader）
+- 0x00008000 ~ 0x00008fff（分区表）
+- 0x00030000 ~ 0x0013ffff（主固件）
+
+**烧录完成后:** esptool 通过 RTS 引脚硬复位，设备自动重启。
+
+#### 分区表（partitions.csv）
+
+| 分区名 | 类型 | 偏移 | 大小 | 说明 |
+|--------|------|------|------|------|
+| nvs | data/nvs | 0x9000 | 0x6000 | NVS 存储 |
+| phy_init | data/phy | 0xF000 | 0x1000 | PHY 初始化 |
+| certs | data | 0x10000 | 0x20000 | 证书 |
+| factory | app/factory | **0x30000** | 0x180000 | 主应用（nina-fw.bin 烧录于此） |
+| storage | data/spiffs | 0x1B0000 | 0x40000 | SPIFFS 文件系统 |
+
+**固件占用:** 0x10f380 / 0x180000 = 71% 已用，29% 空闲。
+
+#### 烧录前检查清单
+
+1. ✅ 使用 **ESP32** 对应的 COM 口（本机为 COM14）
+2. ✅ 关闭占用串口的程序（monitor、Arduino IDE 等）
+3. ✅ 使用数据线（非纯充电线）
+4. ✅ 必要时手动进入下载模式：按住 BOOT → 按 RESET → 松开 RESET → 松开 BOOT
+5. ✅ 波特率优先 **115200**
+
+#### 烧录后验证
+
+```powershell
+# 串口监视（ESP32 口）
+idf.py -p COM14 monitor
+
+# 退出监视器: Ctrl+]
+```
+
+**2026-05-25 串口捕获:** COM14 @ 115200，复位后 8 秒内无 UART 输出（Release 构建 `setDebug(0)` 关闭调试）。功能验证需 K210 侧 SPI 通信或 Debug 构建。
+
+### 5.2.1 Maixduino 双 USB 串口（K210 / ESP32）
+
+Maixduino 板载 **两个 USB 转串口**，在 Windows 设备管理器中端口号通常较大，例如 **COM13、COM14** 等。**一个是 K210，一个是 ESP32**，不可混用。
+
+| COM 口 | 对应芯片 | 用途 | 本次实测 |
+|--------|----------|------|----------|
+| **COM14** | **ESP32** | 烧录 NINA 固件、ESP32 串口调试 | ✅ `idf.py flash` 识别 ESP32-D0WDQ6，烧录成功 |
+| **COM13** | **K210**（推测） | K210 程序下载 / 调试 | ❌ 对 ESP32 烧录报 `No serial data received` |
+
+**如何区分两个口（端口号每次可能变化）：**
+
+1. 设备管理器 → 端口(COM 和 LPT)，拔掉 USB 再看哪个 COM 消失。
+2. 对疑似 ESP32 的口执行 `idf.py -p COMx flash`，若出现 `Chip is ESP32` 即为 ESP32 口。
+3. K210 口用于 MaixPy / K210 固件下载，不能用来烧 ESP32 NINA 固件。
+
+**烧录 NINA 固件务必使用 ESP32 对应的 COM 口：**
+
+```powershell
+$env:IDF_TOOLS_PATH = "C:\Espressif\tools"
+idf.py -p COM14 -b 115200 flash    # COM14 为本机实测 ESP32 口，请以实际为准
+```
+
+**进入 ESP32 下载模式：** 按住 BOOT → 按 RESET → 松开 RESET → 松开 BOOT，然后立即烧录。
+
+### 5.3 串口启动日志
+
+详见 **§5.2 烧录后验证**。简要：`idf.py -p COM14 monitor`，Release 构建默认无 UART 调试输出。
+
+### 5.4 IDE 配置修复（IntelliSense 误报）
+
+| 文件 | 修改 |
+|------|------|
+| `.vscode/c_cpp_properties.json` | 修正 compilerPath 为 `C:/Espressif/tools/...`；添加工具链 include；指向 `build/compile_commands.json` |
+| `.vscode/settings.json` | 添加 `C_Cpp.default.*` 与 `clangd.arguments` |
+| `.clangd` | 过滤 ESP32 专用 GCC 参数；使用 `build/` 编译数据库 |
+| `main/sketch.ino.cpp` | 移除未使用的 `esp_log.h`、`esp_partition.h` |
+
+### 5.5 常用命令速查
+
+```powershell
+# 环境
+$env:IDF_TOOLS_PATH = "C:\Espressif\tools"
+
+# 编译
+idf.py -B build -DBOARD=esp32 build
+
+# 烧录（推荐 115200）
+idf.py -p COM14 -b 115200 flash
+
+# 编译 + 烧录
+idf.py -p COM14 -b 115200 build flash
+
+# 串口监视
+idf.py -p COM14 monitor
+```

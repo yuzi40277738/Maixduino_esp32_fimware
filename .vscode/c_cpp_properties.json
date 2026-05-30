@@ -4,6 +4,7 @@
             "name": "ESP32",
             "includePath": [
                 "${workspaceFolder}/build/config",
+                "${workspaceFolder}/build_esp32/config",
                 "${workspaceFolder}/main",
                 "${workspaceFolder}/components/SPIS/src",
                 "${workspaceFolder}/boards",
@@ -182,7 +183,10 @@
                 "D:/IDF/.espressif/v5.5/esp-idf/components/protocomm/include/transports",
                 "D:/IDF/.espressif/v5.5/esp-idf/components/protocomm/include/crypto/srp6a",
                 "D:/IDF/.espressif/v5.5/esp-idf/components/protocomm/proto-c",
-                "D:/IDF/.espressif/v5.5/esp-idf/components/nvs_flash/include"
+                "D:/IDF/.espressif/v5.5/esp-idf/components/nvs_flash/include",
+                "C:/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/xtensa-esp-elf/include",
+                "C:/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/lib/gcc/xtensa-esp-elf/14.2.0/include",
+                "C:/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/picolibc/include"
             ],
             "defines": [
                 "BOARD_ESP32",
@@ -195,10 +199,11 @@
                 "CONFIG_IDF_TARGET_ESP32",
                 "MBEDTLS_CONFIG_FILE=\"mbedtls/esp_config.h\""
             ],
-            "compilerPath": "D:/IDF/.espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/bin/xtensa-esp32-elf-gcc.exe",
+            "compilerPath": "C:/Espressif/tools/xtensa-esp-elf/esp-14.2.0_20241119/xtensa-esp-elf/bin/xtensa-esp32-elf-gcc.exe",
+            "compileCommands": "${workspaceFolder}/build/compile_commands.json",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
-            "intelliSenseMode": "windows-gcc-x64",
+            "intelliSenseMode": "gcc-x64",
             "browse": {
                 "path": [
                     "${workspaceFolder}/main",

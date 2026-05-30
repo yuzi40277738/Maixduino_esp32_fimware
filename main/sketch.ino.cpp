@@ -14,12 +14,10 @@ extern "C" {
   #include <driver/uart.h>
   #include <esp_bt.h>
   #include "esp_spiffs.h"
-  #include "esp_log.h"
   #include "nvs_flash.h"
   #include <stdio.h>
   #include <sys/types.h>
   #include <dirent.h>
-  #include "esp_partition.h"
 }
 
 #include <Arduino.h>

@@ -1,0 +1,6 @@
+CompileFlags:
+  Remove: [-m*, -f*]
+  Add:
+    - -Wno-unknown-warning-option
+    - --query-driver=C:/Espressif/tools/xtensa-esp-elf/**/bin/xtensa-esp32-elf-*
+CompilationDatabase: build
