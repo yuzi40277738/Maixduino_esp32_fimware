@@ -1,7 +1,7 @@
 # Get IDF_PATH with forward slashes to avoid Windows backslash escape issues
 file(TO_CMAKE_PATH "$ENV{IDF_PATH}" IDF_PATH_CMAKE)
 
-set(_main_srcs CommandHandler.cpp stream_handler.cpp http_client.c sketch.ino.cpp)
+set(_main_srcs CommandHandler.cpp http_client.c sketch.ino.cpp)
 set(_mqtt_ca_crt "${CMAKE_CURRENT_SOURCE_DIR}/../certs/ca.crt")
 
 if(EXISTS "${_mqtt_ca_crt}")

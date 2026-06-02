@@ -41,8 +41,6 @@
 #include "esp_sntp.h"
 #include <stdlib.h>
 
-#include "stream_handler.h"
-
 // Socket types
 #define TCP_MODE 0x00
 #define UDP_MODE 0x01
@@ -67,7 +65,7 @@ int errno;
 // Note: following version definition line is parsed by python script. Please don't change its format (space, indent) only update its version number.
 // ADAFRUIT-CHANGE: not fixed length
 // The version number obeys semver rules. We suffix with "+adafruit" to distinguish from Arduino NINA-FW.
-const char FIRMWARE_VERSION[] = "3.3.1";
+const char FIRMWARE_VERSION[] = "3.3.2";
 
 // ADAFRUIT-CHANGE: user-supplied cert and key
 // Optional, user-defined X.509 certificate
@@ -2615,111 +2613,11 @@ void CommandHandlerClass::begin()
 #define UDIV_UP(a, b) (((a) + (b) - 1) / (b))
 #define ALIGN_UP(a, b) (UDIV_UP(a, b) * (b))
 
-static int streamStartCmd(const uint8_t command[], uint8_t response[])
-{
-  uint8_t numParams = command[2];
-  if (numParams < 1) {
-    response[2] = 1;
-    response[3] = 1;
-    response[4] = 0;
-    return 6;
-  }
-  
-  uint8_t originalCmd = command[3];
-  const uint8_t* params = &command[4];
-  uint16_t paramLen = 0;
-  
-  for (int i = 1; i < numParams; i++) {
-    paramLen += command[4 + paramLen] + 1;
-  }
-
-  uint8_t flat[64];
-  uint16_t flat_len = 0;
-  uint16_t si = 0;
-  while (si < paramLen && flat_len < sizeof(flat)) {
-    uint8_t plen = params[si++];
-    if (si + plen > paramLen) {
-      break;
-    }
-    if (flat_len + plen > sizeof(flat)) {
-      break;
-    }
-    memcpy(flat + flat_len, params + si, plen);
-    flat_len += plen;
-    si += plen;
-  }
-  
-  bool success = stream_start(originalCmd, flat, flat_len);
-  
-  response[2] = 1;
-  response[3] = 1;
-  response[4] = success ? 1 : 0;
-  return 6;
-}
-
-static int streamPullCmd(const uint8_t command[], uint8_t response[])
-{
-  uint8_t flags = 0;
-  uint16_t maxLen = SPI_MAX_DMA_LEN - 16 - 2;  // 留出 flags 和 length 字段的空间
-  
-  uint16_t dataLen = stream_pull(&response[6], maxLen, &flags);
-  
-  response[2] = 2;           // 2 个参数
-  
-  response[3] = 1;           // 参数 1 长度：1 字节
-  response[4] = flags;       // 参数 1：标志位
-  
-  response[5] = dataLen;     // 参数 2 长度
-  // 数据在 response[6..6+dataLen-1]
-  
-  return 6 + dataLen;
-}
-
-static int streamStatusCmd(const uint8_t command[], uint8_t response[])
-{
-  uint8_t status = 0;
-  uint32_t transferred = 0;
-  uint32_t total = 0;
-  
-  stream_get_status(&status, &transferred, &total);
-  
-  response[2] = 3;
-  
-  response[3] = 1;
-  response[4] = status;
-  
-  response[5] = 4;
-  memcpy(&response[6], &transferred, 4);
-  
-  response[10] = 4;
-  memcpy(&response[11], &total, 4);
-  
-  return 16;
-}
-
-static int streamAbortCmd(const uint8_t command[], uint8_t response[])
-{
-  stream_abort();
-  
-  response[2] = 1;
-  response[3] = 1;
-  response[4] = 1;
-  return 6;
-}
-
 int CommandHandlerClass::handle(const uint8_t command[], uint8_t response[])
 {
   int responseLength = 0;
 
-  if (command[0] == START_CMD) {
-    if (command[1] >= 0xF0 && command[1] <= 0xF3) {
-      switch (command[1]) {
-        case 0xF0: responseLength = streamStartCmd(command, response); break;
-        case 0xF1: responseLength = streamPullCmd(command, response); break;
-        case 0xF2: responseLength = streamStatusCmd(command, response); break;
-        case 0xF3: responseLength = streamAbortCmd(command, response); break;
-      }
-    } else if (command[1] < NUM_COMMAND_HANDLERS) {
+  if (command[0] == START_CMD && command[1] < NUM_COMMAND_HANDLERS) {
     #if defined(CMAKE_BUILD_TYPE_DEBUG) && 0
     const char* cmdStr = (command[1] < sizeof(commandStrings) / sizeof(commandStrings[0])) ? commandStrings[command[1]] : NULL;
     if (cmdStr) {
@@ -2727,11 +2625,10 @@ int CommandHandlerClass::handle(const uint8_t command[], uint8_t response[])
     }
     #endif
 
-      CommandHandlerType commandHandlerType = commandHandlers[command[1]];
+    CommandHandlerType commandHandlerType = commandHandlers[command[1]];
 
-      if (commandHandlerType) {
-        responseLength = commandHandlerType(command, response);
-      }
+    if (commandHandlerType) {
+      responseLength = commandHandlerType(command, response);
     }
   }
 
