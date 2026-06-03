@@ -209,7 +209,7 @@ void setupWiFi() {
 
 void loop() {
   static uint32_t lastNTPSyncCheck = 0;
-  const uint32_t NTP_SYNC_INTERVAL_MS = 12 * 60 * 60 * 1000;
+  const uint32_t NTP_SYNC_INTERVAL_MS = 60 * 60 * 1000;  // 1小时重同步
 
   uint32_t now = millis();
   if (now - lastNTPSyncCheck > NTP_SYNC_INTERVAL_MS) {

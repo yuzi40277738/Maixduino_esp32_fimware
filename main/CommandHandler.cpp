@@ -135,12 +135,30 @@ static esp_netif_recv_ret_t IRAM_ATTR apNetifInput_hook(void *input_netif_handle
 
 }
 //替换为国内服务器
+static volatile bool s_ntpSynced = false;
+
+static void _ntpSyncCallback(struct timeval *tv) {
+  s_ntpSynced = true;
+  time_t now;
+  time(&now);
+  struct tm timeinfo;
+  localtime_r(&now, &timeinfo);
+  NINA_PRINTF("NTP synced: %04d-%02d-%02d %02d:%02d:%02d\n",
+    timeinfo.tm_year + 1900, timeinfo.tm_mon + 1, timeinfo.tm_mday,
+    timeinfo.tm_hour, timeinfo.tm_min, timeinfo.tm_sec);
+}
+
 static void _setupNTP(void) {
   esp_sntp_setoperatingmode(SNTP_OPMODE_POLL);
-  esp_sntp_setservername(0, (char*)"0.cn.pool.ntp.org");
-  esp_sntp_setservername(1, (char*)"1.time1.aliyun.com");
-  esp_sntp_setservername(2, (char*)"2.ntp.ntsc.ac.cn");
+  esp_sntp_setservername(0, (char*)"ntp.aliyun.com");
+  esp_sntp_setservername(1, (char*)"ntp.tencent.com");
+  esp_sntp_setservername(2, (char*)"time.windows.com");
+  sntp_set_time_sync_notification_cb(_ntpSyncCallback);
+  esp_sntp_set_sync_mode(SNTP_SYNC_MODE_IMMED);
   esp_sntp_init();
+
+  setenv("TZ", "CST-8", 1);
+  tzset();
 }
 
 extern esp_netif_t *get_esp_interface_netif(esp_interface_t interface);
